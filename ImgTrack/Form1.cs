@@ -14,7 +14,6 @@ namespace ImgTrack
     {
         private Webcam wc;
         private Image curimg;
-        private int test; 
 
         public Form1()
         {
