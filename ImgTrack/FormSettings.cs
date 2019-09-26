@@ -74,5 +74,11 @@ namespace ImgTrack
             bt = new Bitmap(img);
             Oimg = new Bitmap(img);
         }
+
+        public Color GetSelectedColor()
+        {
+            return Color.FromArgb(R,B,G);
+        }
+
     }
 }

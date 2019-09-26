@@ -15,6 +15,7 @@ namespace ImgTrack
     {
         private Webcam wc;
         private Image curimg;
+        public Color color = Color.Black;
 
         public Form1()
         {
@@ -64,10 +65,7 @@ namespace ImgTrack
         private void exportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var csv = new StringBuilder();
-            var color_r = 255;
-            var color_b = 255;
-            var color_g = 255;
-            var new_line = string.Format("{0},{1},{2}", color_r, color_b, color_g);
+            var new_line = string.Format("{0},{1},{2}", color.R, color.B, color.G);
             csv.Append(new_line);
 
             SaveFileDialog dialog = new SaveFileDialog();
@@ -84,11 +82,12 @@ namespace ImgTrack
 
                 writer.Close();
             }
-
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             FormSettings Ftest = new FormSettings(curimg);
-            Ftest.Show();
+            Ftest.ShowDialog();
+            color = Ftest.GetSelectedColor();
         }
     }
 }
