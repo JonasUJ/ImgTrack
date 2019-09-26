@@ -25,6 +25,7 @@ namespace ImgTrack
         {
             wc = new Webcam(pb_left.Size, pb_left);
             Size size = wc.Start();
+            
         }
 
         private void Btn_capture_Click(object sender, EventArgs e)
@@ -78,6 +79,10 @@ namespace ImgTrack
                 writer.Close();
             }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormSettings Ftest = new FormSettings(curimg);
+            Ftest.Show();
         }
     }
 }
