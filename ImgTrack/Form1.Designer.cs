@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pb_left = new System.Windows.Forms.PictureBox();
             this.pb_right = new System.Windows.Forms.PictureBox();
             this.btn_capture = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,6 +88,12 @@
             this.btn_capture.UseVisualStyleBackColor = true;
             this.btn_capture.Click += new System.EventHandler(this.Btn_capture_Click);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,6 +120,7 @@
         private System.Windows.Forms.PictureBox pb_left;
         private System.Windows.Forms.PictureBox pb_right;
         private System.Windows.Forms.Button btn_capture;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
