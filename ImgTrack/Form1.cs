@@ -24,14 +24,19 @@ namespace ImgTrack
         {
             wc = new Webcam(pb_left.Size, pb_left);
             Size size = wc.Start();
-            FormSettings Ftest = new FormSettings();
-            Ftest.Show();
+            
         }
 
         private void Btn_capture_Click(object sender, EventArgs e)
         {
             curimg = pb_left.Image;
             pb_right.Image = curimg;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormSettings Ftest = new FormSettings(curimg);
+            Ftest.Show();
         }
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panelColor = new System.Windows.Forms.Panel();
@@ -39,9 +39,9 @@
             this.trackBarG = new System.Windows.Forms.TrackBar();
             this.trackBarR = new System.Windows.Forms.TrackBar();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelRed = new System.Windows.Forms.Label();
+            this.labelGreen = new System.Windows.Forms.Label();
+            this.labelBlue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarG)).BeginInit();
@@ -112,56 +112,55 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(416, 0);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(372, 194);
             this.chart1.TabIndex = 8;
             this.chart1.Text = "chart1";
             // 
-            // label1
+            // labelRed
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(416, 232);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Red";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.labelRed.AutoSize = true;
+            this.labelRed.Location = new System.Drawing.Point(416, 232);
+            this.labelRed.Name = "labelRed";
+            this.labelRed.Size = new System.Drawing.Size(27, 13);
+            this.labelRed.TabIndex = 9;
+            this.labelRed.Text = "Red";
             // 
-            // label2
+            // labelGreen
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(416, 286);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Green";
+            this.labelGreen.AutoSize = true;
+            this.labelGreen.Location = new System.Drawing.Point(416, 286);
+            this.labelGreen.Name = "labelGreen";
+            this.labelGreen.Size = new System.Drawing.Size(36, 13);
+            this.labelGreen.TabIndex = 10;
+            this.labelGreen.Text = "Green";
             // 
-            // label3
+            // labelBlue
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(416, 334);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(28, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Blue";
+            this.labelBlue.AutoSize = true;
+            this.labelBlue.Location = new System.Drawing.Point(416, 334);
+            this.labelBlue.Name = "labelBlue";
+            this.labelBlue.Size = new System.Drawing.Size(28, 13);
+            this.labelBlue.TabIndex = 11;
+            this.labelBlue.Text = "Blue";
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelBlue);
+            this.Controls.Add(this.labelGreen);
+            this.Controls.Add(this.labelRed);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.trackBarR);
             this.Controls.Add(this.trackBarG);
@@ -172,6 +171,7 @@
             this.Controls.Add(this.pictureBoxPreview);
             this.Name = "FormSettings";
             this.Text = "FormSettings";
+            this.Load += new System.EventHandler(this.FormSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarG)).EndInit();
@@ -192,8 +192,8 @@
         private System.Windows.Forms.TrackBar trackBarG;
         private System.Windows.Forms.TrackBar trackBarR;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelRed;
+        private System.Windows.Forms.Label labelGreen;
+        private System.Windows.Forms.Label labelBlue;
     }
 }
