@@ -33,7 +33,6 @@ namespace ImgTrack
         {
             curimg = pb_left.Image;
             pb_right.Image = curimg;
-            ChartUtil.MakeIntoHistogram(charttest, curimg);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
