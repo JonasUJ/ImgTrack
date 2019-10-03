@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,14 +25,14 @@ namespace ImgTrack
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            wc = new Webcam(pb_left.Size, pb_left);
-            Size size = wc.Start();
-            
+            wc = new Webcam(pb_left);
+            wc.Start();
         }
 
         private void Btn_capture_Click(object sender, EventArgs e)
         {
-            curimg = pb_left.Image;
+            if (curimg != null) curimg.Dispose();
+            curimg = pb_left.Image.Clone() as Bitmap;
             pb_right.Image = curimg;
         }
 
@@ -55,10 +56,7 @@ namespace ImgTrack
                     string color_g = colors[2];
                     MessageBox.Show("rød: " +color_r+ " blå: " +color_b+ " grøn: " +color_g);
                 }
-                
-                
             }
-
         }
 
         private void exportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,17 +74,28 @@ namespace ImgTrack
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 writer = new StreamWriter(dialog.FileName);
-
                 writer.WriteLine(csv);
-
                 writer.Close();
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void thresholdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormSettings Ftest = new FormSettings(curimg);
-            Ftest.ShowDialog();
-            color = Ftest.GetSelectedColor();
+            Image img;
+            if (curimg == null) img = pb_left.Image;
+            else img = curimg.Clone() as Bitmap;
+            FormSettings fsettings = new FormSettings(img);
+            fsettings.ShowDialog();
+            color = fsettings.GetSelectedColor();
+        }
+
+        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VideoSettings vsetings = new VideoSettings(wc);
+            if (vsetings.ShowDialog(this) == DialogResult.OK)
+            {
+                wc.videoSource.VideoResolution = vsetings.GetSelection();
+            }
         }
     }
 }
