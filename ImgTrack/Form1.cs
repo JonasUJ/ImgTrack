@@ -94,8 +94,13 @@ namespace ImgTrack
             VideoSettings vsetings = new VideoSettings(wc);
             if (vsetings.ShowDialog(this) == DialogResult.OK)
             {
-                wc.videoSource.VideoResolution = vsetings.GetSelection();
+                bgw_setres.RunWorkerAsync(vsetings);
             }
+        }
+
+        private void Bgw_setres_DoWork(object sender, DoWorkEventArgs e)
+        {
+            wc.SetResolution(((VideoSettings)e.Argument).GetSelection());
         }
     }
 }

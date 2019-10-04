@@ -43,6 +43,21 @@ namespace ImgTrack
             }
         }
 
+        public void SetResolution(VideoCapabilities vcap)
+        {
+            videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+            Thread stopper = new Thread(delegate()
+            {
+                videoSource.SignalToStop();
+            videoSource.WaitForStop();
+            });
+            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            stopper.Start();
+            stopper.Join();
+            videoSource.VideoResolution = vcap;
+            videoSource.Start();
+        }
+
         private Bitmap ResizeCopy(Bitmap frame)
         {
             Bitmap newImage = new Bitmap(videoSource.VideoResolution.FrameSize.Width, videoSource.VideoResolution.FrameSize.Height);
@@ -79,8 +94,9 @@ namespace ImgTrack
         //close the device safely
         public void Stop()
         {
-            if (!(videoSource == null) && videoSource.IsRunning)
+            if (videoSource != null && videoSource.IsRunning)
             {
+                videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 videoSource.SignalToStop();
                 videoSource = null;
             }
