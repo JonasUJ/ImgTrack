@@ -23,10 +23,13 @@ namespace ImgTrack
         private Bitmap bt;
         private Bitmap Oimg;
 
-        public FormSettings(Image img)
+        public FormSettings(Image img, Color color)
         {
             InitializeComponent();
             this.img = img;
+            trackBarR.Value = color.R;
+            trackBarG.Value = color.G;
+            trackBarB.Value = color.B;
         }
 
         private void trackBarR_Scroll(object sender, EventArgs e)
@@ -53,6 +56,12 @@ namespace ImgTrack
             panelColor.BackColor = Color.FromArgb(R, G, B);
             Bp = B / 255.0;
             labelBlue.Text = "Blue"+Bp+"%";
+            ChangeImage();
+        }
+
+        private void trackN_Scroll(object sender, EventArgs e)
+        {
+            N = trackN.Value;
             ChangeImage();
         }
 
@@ -83,5 +92,6 @@ namespace ImgTrack
             return Color.FromArgb(R,B,G);
         }
 
+        
     }
 }

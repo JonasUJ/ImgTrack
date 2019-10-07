@@ -184,6 +184,7 @@
             this.trackN.TabIndex = 12;
             this.trackN.TickFrequency = 2;
             this.trackN.Value = 1;
+            this.trackN.Scroll += new System.EventHandler(this.trackN_Scroll);
             // 
             // label1
             // 
