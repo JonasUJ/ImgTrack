@@ -56,6 +56,12 @@ namespace ImgTrack
             ChangeImage();
         }
 
+        private void trackN_Scroll(object sender, EventArgs e)
+        {
+            N = trackN.Value;
+            ChangeImage();
+        }
+
         private void ChangeImage()
         {
             N = trackN.Value;
@@ -83,5 +89,6 @@ namespace ImgTrack
             return Color.FromArgb(R,B,G);
         }
 
+        
     }
 }
