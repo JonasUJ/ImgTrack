@@ -75,6 +75,13 @@ namespace ImgTrack
         {
             bt = new Bitmap(img);
             Oimg = new Bitmap(img);
+            ChartUtil.MakeIntoHistogram(chart_histogram, img);
         }
+
+        public Color GetSelectedColor()
+        {
+            return Color.FromArgb(R,B,G);
+        }
+
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panelColor = new System.Windows.Forms.Panel();
@@ -38,7 +38,7 @@
             this.trackBarB = new System.Windows.Forms.TrackBar();
             this.trackBarG = new System.Windows.Forms.TrackBar();
             this.trackBarR = new System.Windows.Forms.TrackBar();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart_histogram = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.labelRed = new System.Windows.Forms.Label();
             this.labelGreen = new System.Windows.Forms.Label();
             this.labelBlue = new System.Windows.Forms.Label();
@@ -56,6 +56,7 @@
             // 
             this.pictureBoxPreview.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBoxPreview.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(409, 499);
             this.pictureBoxPreview.TabIndex = 0;
@@ -63,96 +64,106 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(415, 452);
+            this.buttonCancel.Location = new System.Drawing.Point(553, 496);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(184, 35);
+            this.buttonCancel.Size = new System.Drawing.Size(245, 43);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // panelColor
             // 
-            this.panelColor.Location = new System.Drawing.Point(415, 402);
+            this.panelColor.Location = new System.Drawing.Point(555, 434);
+            this.panelColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelColor.Name = "panelColor";
-            this.panelColor.Size = new System.Drawing.Size(373, 44);
+            this.panelColor.Size = new System.Drawing.Size(497, 54);
             this.panelColor.TabIndex = 3;
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(605, 452);
+            this.buttonApply.Location = new System.Drawing.Point(807, 496);
+            this.buttonApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(184, 35);
+            this.buttonApply.Size = new System.Drawing.Size(245, 43);
             this.buttonApply.TabIndex = 4;
             this.buttonApply.Text = "Apply";
             this.buttonApply.UseVisualStyleBackColor = true;
             // 
             // trackBarB
             // 
-            this.trackBarB.Location = new System.Drawing.Point(416, 302);
+            this.trackBarB.Location = new System.Drawing.Point(555, 372);
+            this.trackBarB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.trackBarB.Maximum = 255;
             this.trackBarB.Name = "trackBarB";
-            this.trackBarB.Size = new System.Drawing.Size(373, 45);
+            this.trackBarB.Size = new System.Drawing.Size(497, 56);
             this.trackBarB.TabIndex = 5;
             this.trackBarB.Scroll += new System.EventHandler(this.trackBarB_Scroll);
             // 
             // trackBarG
             // 
-            this.trackBarG.Location = new System.Drawing.Point(415, 251);
+            this.trackBarG.Location = new System.Drawing.Point(553, 309);
+            this.trackBarG.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.trackBarG.Maximum = 255;
             this.trackBarG.Name = "trackBarG";
-            this.trackBarG.Size = new System.Drawing.Size(373, 45);
+            this.trackBarG.Size = new System.Drawing.Size(497, 56);
             this.trackBarG.TabIndex = 6;
             this.trackBarG.Scroll += new System.EventHandler(this.trackBarG_Scroll);
             // 
             // trackBarR
             // 
-            this.trackBarR.Location = new System.Drawing.Point(416, 200);
+            this.trackBarR.Location = new System.Drawing.Point(555, 246);
+            this.trackBarR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.trackBarR.Maximum = 255;
             this.trackBarR.Name = "trackBarR";
-            this.trackBarR.Size = new System.Drawing.Size(373, 45);
+            this.trackBarR.Size = new System.Drawing.Size(497, 56);
             this.trackBarR.TabIndex = 7;
             this.trackBarR.Scroll += new System.EventHandler(this.trackBarR_Scroll);
             // 
-            // chart1
+            // chart_histogram
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(416, 0);
-            this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(372, 194);
-            this.chart1.TabIndex = 8;
-            this.chart1.Text = "chart1";
+            chartArea1.Name = "ChartArea1";
+            this.chart_histogram.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_histogram.Legends.Add(legend1);
+            this.chart_histogram.Location = new System.Drawing.Point(555, 0);
+            this.chart_histogram.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chart_histogram.Name = "chart_histogram";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart_histogram.Series.Add(series1);
+            this.chart_histogram.Size = new System.Drawing.Size(496, 239);
+            this.chart_histogram.TabIndex = 8;
+            this.chart_histogram.Text = "chart1";
             // 
             // labelRed
             // 
             this.labelRed.AutoSize = true;
-            this.labelRed.Location = new System.Drawing.Point(416, 232);
+            this.labelRed.Location = new System.Drawing.Point(555, 286);
+            this.labelRed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRed.Name = "labelRed";
-            this.labelRed.Size = new System.Drawing.Size(27, 13);
+            this.labelRed.Size = new System.Drawing.Size(34, 17);
             this.labelRed.TabIndex = 9;
             this.labelRed.Text = "Red";
             // 
             // labelGreen
             // 
             this.labelGreen.AutoSize = true;
-            this.labelGreen.Location = new System.Drawing.Point(416, 286);
+            this.labelGreen.Location = new System.Drawing.Point(555, 352);
+            this.labelGreen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelGreen.Name = "labelGreen";
-            this.labelGreen.Size = new System.Drawing.Size(36, 13);
+            this.labelGreen.Size = new System.Drawing.Size(48, 17);
             this.labelGreen.TabIndex = 10;
             this.labelGreen.Text = "Green";
             // 
             // labelBlue
             // 
             this.labelBlue.AutoSize = true;
-            this.labelBlue.Location = new System.Drawing.Point(416, 334);
+            this.labelBlue.Location = new System.Drawing.Point(555, 411);
+            this.labelBlue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBlue.Name = "labelBlue";
-            this.labelBlue.Size = new System.Drawing.Size(28, 13);
+            this.labelBlue.Size = new System.Drawing.Size(36, 17);
             this.labelBlue.TabIndex = 11;
             this.labelBlue.Text = "Blue";
             // 
@@ -177,7 +188,7 @@
             // 
             // FormSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 499);
             this.Controls.Add(this.label1);
@@ -185,7 +196,7 @@
             this.Controls.Add(this.labelBlue);
             this.Controls.Add(this.labelGreen);
             this.Controls.Add(this.labelRed);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.chart_histogram);
             this.Controls.Add(this.trackBarR);
             this.Controls.Add(this.trackBarG);
             this.Controls.Add(this.trackBarB);
@@ -193,6 +204,7 @@
             this.Controls.Add(this.panelColor);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.pictureBoxPreview);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormSettings";
             this.Text = "FormSettings";
             this.Load += new System.EventHandler(this.FormSettings_Load);
@@ -216,7 +228,7 @@
         private System.Windows.Forms.TrackBar trackBarB;
         private System.Windows.Forms.TrackBar trackBarG;
         private System.Windows.Forms.TrackBar trackBarR;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_histogram;
         private System.Windows.Forms.Label labelRed;
         private System.Windows.Forms.Label labelGreen;
         private System.Windows.Forms.Label labelBlue;
