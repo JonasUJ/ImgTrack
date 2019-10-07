@@ -48,7 +48,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_histogram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackN)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,67 +56,60 @@
             // 
             this.pictureBoxPreview.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBoxPreview.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(409, 499);
+            this.pictureBoxPreview.Size = new System.Drawing.Size(307, 519);
             this.pictureBoxPreview.TabIndex = 0;
             this.pictureBoxPreview.TabStop = false;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(553, 496);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCancel.Location = new System.Drawing.Point(315, 472);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(245, 43);
+            this.buttonCancel.Size = new System.Drawing.Size(184, 35);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // panelColor
             // 
-            this.panelColor.Location = new System.Drawing.Point(555, 434);
-            this.panelColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelColor.Location = new System.Drawing.Point(316, 422);
             this.panelColor.Name = "panelColor";
-            this.panelColor.Size = new System.Drawing.Size(497, 54);
+            this.panelColor.Size = new System.Drawing.Size(373, 44);
             this.panelColor.TabIndex = 3;
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(807, 496);
-            this.buttonApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonApply.Location = new System.Drawing.Point(505, 472);
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(245, 43);
+            this.buttonApply.Size = new System.Drawing.Size(184, 35);
             this.buttonApply.TabIndex = 4;
             this.buttonApply.Text = "Apply";
             this.buttonApply.UseVisualStyleBackColor = true;
             // 
             // trackBarB
             // 
-            this.trackBarB.Location = new System.Drawing.Point(555, 372);
-            this.trackBarB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBarB.Location = new System.Drawing.Point(313, 302);
             this.trackBarB.Maximum = 255;
             this.trackBarB.Name = "trackBarB";
-            this.trackBarB.Size = new System.Drawing.Size(497, 56);
+            this.trackBarB.Size = new System.Drawing.Size(373, 45);
             this.trackBarB.TabIndex = 5;
             this.trackBarB.Scroll += new System.EventHandler(this.trackBarB_Scroll);
             // 
             // trackBarG
             // 
-            this.trackBarG.Location = new System.Drawing.Point(553, 309);
-            this.trackBarG.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBarG.Location = new System.Drawing.Point(313, 251);
             this.trackBarG.Maximum = 255;
             this.trackBarG.Name = "trackBarG";
-            this.trackBarG.Size = new System.Drawing.Size(497, 56);
+            this.trackBarG.Size = new System.Drawing.Size(373, 45);
             this.trackBarG.TabIndex = 6;
             this.trackBarG.Scroll += new System.EventHandler(this.trackBarG_Scroll);
             // 
             // trackBarR
             // 
-            this.trackBarR.Location = new System.Drawing.Point(555, 246);
-            this.trackBarR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBarR.Location = new System.Drawing.Point(315, 200);
             this.trackBarR.Maximum = 255;
             this.trackBarR.Name = "trackBarR";
-            this.trackBarR.Size = new System.Drawing.Size(497, 56);
+            this.trackBarR.Size = new System.Drawing.Size(373, 45);
             this.trackBarR.TabIndex = 7;
             this.trackBarR.Scroll += new System.EventHandler(this.trackBarR_Scroll);
             // 
@@ -126,61 +119,59 @@
             this.chart_histogram.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart_histogram.Legends.Add(legend1);
-            this.chart_histogram.Location = new System.Drawing.Point(555, 0);
-            this.chart_histogram.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chart_histogram.Location = new System.Drawing.Point(315, 0);
             this.chart_histogram.Name = "chart_histogram";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart_histogram.Series.Add(series1);
-            this.chart_histogram.Size = new System.Drawing.Size(496, 239);
+            this.chart_histogram.Size = new System.Drawing.Size(372, 194);
             this.chart_histogram.TabIndex = 8;
             this.chart_histogram.Text = "chart1";
             // 
             // labelRed
             // 
             this.labelRed.AutoSize = true;
-            this.labelRed.Location = new System.Drawing.Point(555, 286);
-            this.labelRed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelRed.Location = new System.Drawing.Point(712, 422);
             this.labelRed.Name = "labelRed";
-            this.labelRed.Size = new System.Drawing.Size(34, 17);
+            this.labelRed.Size = new System.Drawing.Size(27, 13);
             this.labelRed.TabIndex = 9;
             this.labelRed.Text = "Red";
             // 
             // labelGreen
             // 
             this.labelGreen.AutoSize = true;
-            this.labelGreen.Location = new System.Drawing.Point(555, 352);
-            this.labelGreen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelGreen.Location = new System.Drawing.Point(753, 390);
             this.labelGreen.Name = "labelGreen";
-            this.labelGreen.Size = new System.Drawing.Size(48, 17);
+            this.labelGreen.Size = new System.Drawing.Size(36, 13);
             this.labelGreen.TabIndex = 10;
             this.labelGreen.Text = "Green";
             // 
             // labelBlue
             // 
             this.labelBlue.AutoSize = true;
-            this.labelBlue.Location = new System.Drawing.Point(555, 411);
-            this.labelBlue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelBlue.Location = new System.Drawing.Point(748, 440);
             this.labelBlue.Name = "labelBlue";
-            this.labelBlue.Size = new System.Drawing.Size(36, 17);
+            this.labelBlue.Size = new System.Drawing.Size(28, 13);
             this.labelBlue.TabIndex = 11;
             this.labelBlue.Text = "Blue";
             // 
             // trackN
             // 
-            this.trackN.Location = new System.Drawing.Point(416, 353);
+            this.trackN.Location = new System.Drawing.Point(312, 352);
+            this.trackN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.trackN.Maximum = 100;
             this.trackN.Minimum = 1;
             this.trackN.Name = "trackN";
-            this.trackN.Size = new System.Drawing.Size(373, 45);
+            this.trackN.Size = new System.Drawing.Size(374, 45);
             this.trackN.TabIndex = 12;
             this.trackN.Value = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(416, 386);
+            this.label1.Location = new System.Drawing.Point(712, 453);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 13;
@@ -188,9 +179,9 @@
             // 
             // FormSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 499);
+            this.ClientSize = new System.Drawing.Size(811, 519);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.trackN);
             this.Controls.Add(this.labelBlue);
@@ -204,7 +195,6 @@
             this.Controls.Add(this.panelColor);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.pictureBoxPreview);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormSettings";
             this.Text = "FormSettings";
             this.Load += new System.EventHandler(this.FormSettings_Load);
@@ -212,7 +202,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_histogram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackN)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
