@@ -15,6 +15,7 @@ namespace ImgTrack
         public int R;
         public int G;
         public int B;
+        public int N;
         public double Rp;
         public double Gp;
         public double Bp;
@@ -57,13 +58,14 @@ namespace ImgTrack
 
         private void ChangeImage()
         {
+            N = trackN.Value;
             for (int y = 0; y < bt.Height; y++)
             {
                 for (int x = 0; x < bt.Width; x++)
                 {
                     Color c = Oimg.GetPixel(x, y);
                     //bt.SetPixel(x, y, Color.FromArgb((int)(c.R*Rp), (int)(c.G*Gp), (int)(c.B*Bp)));
-                    bt.SetPixel(x, y, (c.R > R && c.G > G && c.B > B) ? Color.Black : Color.White);
+                    bt.SetPixel(x, y, (c.R > R-N && c.R < R + N && c.G > G-N && c.G < G + N && c.B > B-N && c.B < B+N ) ? Color.Black : Color.White);
                 }
             }
             pictureBoxPreview.Image = bt;
