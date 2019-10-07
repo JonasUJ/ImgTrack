@@ -83,12 +83,6 @@ namespace ImgTrack
                 }
                 pb.Image = bitmap;
             });
-            //Bitmap newFrame = AForge.Imaging.Image.Clone(eventArgs.Frame);
-            //pb.Image = newFrame.Clone() as Bitmap;
-            //newFrame.Dispose();
-            //Bitmap frame = ResizeCopy(eventArgs.Frame);
-            //this.pb.Image = frame.Clone() as Bitmap;
-            //frame.Dispose();
         }
 
         //close the device safely
