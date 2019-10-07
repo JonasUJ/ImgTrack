@@ -51,10 +51,7 @@ namespace ImgTrack
                 {
                     var imported_colors = reader.ReadLine();  
                     string[] colors = imported_colors.Split(',');
-                    string color_r = colors[0];
-                    string color_b = colors[1];
-                    string color_g = colors[2];
-                    MessageBox.Show("rød: " +color_r+ " blå: " +color_b+ " grøn: " +color_g);
+                    color = Color.FromArgb(Convert.ToInt32(colors[0]), Convert.ToInt32(colors[1]), Convert.ToInt32(colors[2]));
                 }
             }
         }
@@ -84,7 +81,7 @@ namespace ImgTrack
             Image img;
             if (curimg == null) img = pb_left.Image;
             else img = curimg.Clone() as Bitmap;
-            FormSettings fsettings = new FormSettings(img);
+            FormSettings fsettings = new FormSettings(img, color);
             fsettings.ShowDialog();
             color = fsettings.GetSelectedColor();
         }
