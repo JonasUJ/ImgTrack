@@ -30,12 +30,17 @@ namespace ImgTrack
             trackBarR.Value = color.R;
             trackBarG.Value = color.G;
             trackBarB.Value = color.B;
+            R = color.R;
+            G = color.G;
+            B = color.B;
+            labelRed.Text = $"Red: {R}";
+            labelGreen.Text = $"Green: {G}";
+            labelBlue.Text = $"Blue: {B}";
         }
 
         private void trackBarR_Scroll(object sender, EventArgs e)
         {
             R = trackBarR.Value;
-            panelColor.BackColor = Color.FromArgb(R, G, B);
             labelRed.Text = $"Red: {R}";
             ChangeImage();
         }
@@ -43,7 +48,6 @@ namespace ImgTrack
         private void trackBarG_Scroll(object sender, EventArgs e)
         {
             G = trackBarG.Value;
-            panelColor.BackColor = Color.FromArgb(R, G, B);
             labelGreen.Text = $"Green: {G}";
             ChangeImage();
         }
@@ -51,7 +55,6 @@ namespace ImgTrack
         private void trackBarB_Scroll(object sender, EventArgs e)
         {
             B = trackBarB.Value;
-            panelColor.BackColor = Color.FromArgb(R, G, B);
             labelBlue.Text = $"Blue: {B}";
             ChangeImage();
         }
@@ -82,6 +85,7 @@ namespace ImgTrack
             bt = new Bitmap(img);
             Oimg = new Bitmap(img);
             ChartUtil.MakeIntoHistogram(chart_histogram, img);
+            ChangeImage();
         }
 
         public Color GetSelectedColor()
@@ -89,6 +93,14 @@ namespace ImgTrack
             return Color.FromArgb(R,B,G);
         }
 
-        
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ButtonApply_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

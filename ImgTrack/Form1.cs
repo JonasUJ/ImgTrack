@@ -89,8 +89,10 @@ namespace ImgTrack
             if (curimg == null) img = pb_left.Image;
             else img = curimg.Clone() as Bitmap;
             FormSettings fsettings = new FormSettings(img, color);
-            fsettings.ShowDialog();
-            color = fsettings.GetSelectedColor();
+            if (fsettings.ShowDialog(this) == DialogResult.OK)
+            {
+                color = fsettings.GetSelectedColor();
+            }
         }
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)

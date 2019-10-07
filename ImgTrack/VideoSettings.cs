@@ -13,7 +13,6 @@ namespace ImgTrack
 {
     public partial class VideoSettings : Form
     {
-        public bool Success = false;
         private Webcam webcam;
         public VideoSettings(Webcam webcam)
         {
@@ -49,7 +48,6 @@ namespace ImgTrack
 
         private void btn_apply_Click(object sender, EventArgs e)
         {
-            this.Success = true;
             this.Close();
         }
 

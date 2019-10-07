@@ -17,7 +17,7 @@ namespace ImgTrack
         {
             Bmp = new Bitmap(img);
             TotalPixels = img.Width * img.Height;
-            GreyscaleValues = new int[255];
+            GreyscaleValues = new int[256];
             for (int x = 0; x < img.Width; x++)
             {
                 for (int y = 0; y < img.Height; y++)
