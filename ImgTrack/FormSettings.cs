@@ -22,10 +22,13 @@ namespace ImgTrack
         private Bitmap bt;
         private Bitmap Oimg;
 
-        public FormSettings(Image img)
+        public FormSettings(Image img, Color color)
         {
             InitializeComponent();
             this.img = img;
+            trackBarR.Value = color.R;
+            trackBarG.Value = color.G;
+            trackBarB.Value = color.B;
         }
 
         private void trackBarR_Scroll(object sender, EventArgs e)
