@@ -36,8 +36,7 @@ namespace ImgTrack
         {
             R = trackBarR.Value;
             panelColor.BackColor = Color.FromArgb(R, G, B);
-            Rp = R / 255.0;
-            labelRed.Text = "Red"+Rp+"%";
+            labelRed.Text = $"Red: {R}";
             ChangeImage();
         }
 
@@ -45,8 +44,7 @@ namespace ImgTrack
         {
             G = trackBarG.Value;
             panelColor.BackColor = Color.FromArgb(R, G, B);
-            Gp = G / 255.0;
-            labelGreen.Text = "Green"+Gp+"%";
+            labelGreen.Text = $"Green: {G}";
             ChangeImage();
         }
 
@@ -54,8 +52,7 @@ namespace ImgTrack
         {
             B = trackBarB.Value;
             panelColor.BackColor = Color.FromArgb(R, G, B);
-            Bp = B / 255.0;
-            labelBlue.Text = "Blue"+Bp+"%";
+            labelBlue.Text = $"Blue: {B}";
             ChangeImage();
         }
 
@@ -74,7 +71,7 @@ namespace ImgTrack
                 {
                     Color c = Oimg.GetPixel(x, y);
                     //bt.SetPixel(x, y, Color.FromArgb((int)(c.R*Rp), (int)(c.G*Gp), (int)(c.B*Bp)));
-                    bt.SetPixel(x, y, (c.R > R-N && c.R < R + N && c.G > G-N && c.G < G + N && c.B > B-N && c.B < B+N ) ? Color.Black : Color.White);
+                    bt.SetPixel(x, y, (c.R > R-N && c.R < R + N && c.G > G-N && c.G < G + N && c.B > B-N && c.B < B+N ) ? Color.White : Color.Black);
                 }
             }
             pictureBoxPreview.Image = bt;
