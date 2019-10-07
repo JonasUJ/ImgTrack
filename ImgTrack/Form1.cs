@@ -49,9 +49,16 @@ namespace ImgTrack
                 var open_file = dialog.FileName;
                 using (var reader = new StreamReader(open_file))
                 {
-                    var imported_colors = reader.ReadLine();  
-                    string[] colors = imported_colors.Split(',');
-                    color = Color.FromArgb(Convert.ToInt32(colors[0]), Convert.ToInt32(colors[1]), Convert.ToInt32(colors[2]));
+                    try
+                    {
+                        var imported_colors = reader.ReadLine();
+                        string[] colors = imported_colors.Split(',');
+                        color = Color.FromArgb(Convert.ToInt32(colors[0]), Convert.ToInt32(colors[1]), Convert.ToInt32(colors[2]));
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Denne fil er ikke understøttet", "Fil kunne ikke læses!", MessageBoxButtons.OK);
+                    }
                 }
             }
         }
