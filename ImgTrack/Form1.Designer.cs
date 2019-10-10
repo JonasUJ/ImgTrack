@@ -60,7 +60,7 @@
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(16, 43);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -79,7 +79,7 @@
             // 
             this.pb_left.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb_left.Location = new System.Drawing.Point(0, 0);
-            this.pb_left.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_left.Margin = new System.Windows.Forms.Padding(4);
             this.pb_left.Name = "pb_left";
             this.pb_left.Size = new System.Drawing.Size(492, 351);
             this.pb_left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -90,7 +90,7 @@
             // 
             this.pb_right.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb_right.Location = new System.Drawing.Point(0, 0);
-            this.pb_right.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_right.Margin = new System.Windows.Forms.Padding(4);
             this.pb_right.Name = "pb_right";
             this.pb_right.Size = new System.Drawing.Size(512, 351);
             this.pb_right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -137,27 +137,28 @@
             // importSettingsToolStripMenuItem
             // 
             this.importSettingsToolStripMenuItem.Name = "importSettingsToolStripMenuItem";
-            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.importSettingsToolStripMenuItem.Text = "&Import Settings";
             this.importSettingsToolStripMenuItem.Click += new System.EventHandler(this.importSettingsToolStripMenuItem_Click);
             // 
             // exportSettingsToolStripMenuItem
             // 
             this.exportSettingsToolStripMenuItem.Name = "exportSettingsToolStripMenuItem";
-            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.exportSettingsToolStripMenuItem.Text = "&Export Settings";
             this.exportSettingsToolStripMenuItem.Click += new System.EventHandler(this.exportSettingsToolStripMenuItem_Click);
             // 
             // openImageToolStripMenuItem
             // 
             this.openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.openImageToolStripMenuItem.Text = "&Open Image";
+            this.openImageToolStripMenuItem.Click += new System.EventHandler(this.openImageToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.exitToolStripMenuItem.Text = "&Exit";
             // 
             // settingsToolStripMenuItem
@@ -172,14 +173,14 @@
             // thresholdToolStripMenuItem
             // 
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.thresholdToolStripMenuItem.Text = "&Threshold";
             this.thresholdToolStripMenuItem.Click += new System.EventHandler(this.thresholdToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.videoToolStripMenuItem.Text = "&Video";
             this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
@@ -206,7 +207,7 @@
             this.Controls.Add(this.btn_capture);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1061, 481);
             this.Name = "Form1";
             this.Text = "ImgTrack";

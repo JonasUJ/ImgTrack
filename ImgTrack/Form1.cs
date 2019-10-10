@@ -149,5 +149,21 @@ namespace ImgTrack
                 pb_right.Image.Save(dialog.FileName + ".png", ImageFormat.Png);
             }
         }
+
+        private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Pick your poison, Lad";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var open_file = dialog.FileName;
+                Bitmap bt = new Bitmap(open_file);
+                pb_right.Image = bt;
+                curimg = bt;
+            }
+
+
+        }
     }
 }
