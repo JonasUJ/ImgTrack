@@ -74,8 +74,9 @@ namespace ImgTrack
                     bt.SetPixel(x, y, (c.R > R-N && c.R < R + N && c.G > G-N && c.G < G + N && c.B > B-N && c.B < B+N ) ? Color.White : Color.Black);
                 }
             }
-            pictureBoxPreview.Image = bt;
             panelColor.BackColor = Color.FromArgb(R, G, B);
+            ImageData imgd = new ImageData(bt);
+            pictureBoxPreview.Image = imgd.DrawCross();
         }
 
         private void FormSettings_Load(object sender, EventArgs e)
