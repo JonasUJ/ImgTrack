@@ -45,6 +45,7 @@ namespace ImgTrack
         private void importSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Kore ga... Requiem da";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var open_file = dialog.FileName;
@@ -72,7 +73,7 @@ namespace ImgTrack
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "CSV|.csv";
-            dialog.Title = "I reject me humanity, JoJo!";
+            dialog.Title = "I reject my humanity, JoJo!";
 
             StreamWriter writer = null;
 
@@ -147,6 +148,22 @@ namespace ImgTrack
                 if (dialog.ShowDialog() == DialogResult.OK)
                 pb_right.Image.Save(dialog.FileName + ".png", ImageFormat.Png);
             }
+        }
+
+        private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Pick your poison, Lad";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var open_file = dialog.FileName;
+                Bitmap bt = new Bitmap(open_file);
+                pb_right.Image = bt;
+                curimg = bt;
+            }
+
+
         }
     }
 }
