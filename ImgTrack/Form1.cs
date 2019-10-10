@@ -45,6 +45,7 @@ namespace ImgTrack
         private void importSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Kore ga... Requiem da";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var open_file = dialog.FileName;
@@ -72,7 +73,7 @@ namespace ImgTrack
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "CSV|.csv";
-            dialog.Title = "I reject me humanity, JoJo!";
+            dialog.Title = "I reject my humanity, JoJo!";
 
             StreamWriter writer = null;
 
