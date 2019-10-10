@@ -14,6 +14,9 @@ namespace ImgTrack
         public VideoCaptureDevice videoSource = null;          //the selected videosource
         private PictureBox pb;
 
+        public double Width { get => videoSource.VideoResolution.FrameSize.Width; }
+        public double Height { get => videoSource.VideoResolution.FrameSize.Height; }
+
         public Webcam(PictureBox pb)
         {
             this.pb = pb;
@@ -58,15 +61,36 @@ namespace ImgTrack
             videoSource.Start();
         }
 
+        private Size getWidthHeight()
+        {
+            if (pb.Height / Height >= pb.Width / Width)
+            {
+                double ratio = (double)pb.Width / pb.Height;
+                Size s = new Size();
+                s.Width = pb.Width;
+                s.Height = (int)(ratio * pb.Height * (Height / Width));
+                return s;
+            }
+            else
+            {
+                double ratio = (double)pb.Height / pb.Width;
+                Size s = new Size();
+                s.Height = pb.Height;
+                s.Width = (int)(ratio * pb.Width * (Width / Height));
+                return s;
+            }
+        }
+
         private Bitmap ResizeCopy(Bitmap frame)
         {
-            Bitmap newImage = new Bitmap(videoSource.VideoResolution.FrameSize.Width, videoSource.VideoResolution.FrameSize.Height);
+            Size s = getWidthHeight();
+            Bitmap newImage = new Bitmap(s.Width, s.Height);
             using (Graphics gr = Graphics.FromImage(newImage))
             {
                 gr.SmoothingMode = SmoothingMode.HighQuality;
                 gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                gr.DrawImage(frame, new Rectangle(0, 0, videoSource.VideoResolution.FrameSize.Width, videoSource.VideoResolution.FrameSize.Height));
+                gr.DrawImage(frame, new Rectangle(0, 0, s.Width, s.Height));
             }
             return newImage;
         }

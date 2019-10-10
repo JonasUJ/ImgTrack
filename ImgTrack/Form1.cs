@@ -108,5 +108,34 @@ namespace ImgTrack
         {
             wc.SetResolution(((VideoSettings)e.Argument).GetSelection());
         }
+
+        private void Pb_Resize(object sender, EventArgs e)
+        {
+            PictureBox pb = sender as PictureBox;
+            if (curimg == null) return;
+            Size newsize = ResizeFrame(curimg.Size, pb.Size);
+            Console.WriteLine(pb.Size);
+            pb.Image = new Bitmap(curimg, newsize);
+        }
+
+        private Size ResizeFrame(Size originalFrame, Size newFrame)
+        {
+            if (newFrame.Height / (double)originalFrame.Height >= newFrame.Width / (double)originalFrame.Width)
+            {
+                double ratio = (double)newFrame.Width / newFrame.Height;
+                Size s = new Size();
+                s.Width = newFrame.Width;
+                s.Height = (int)(ratio * newFrame.Height * ((double)originalFrame.Height / originalFrame.Width));
+                return s;
+            }
+            else
+            {
+                double ratio = (double)newFrame.Height / newFrame.Width;
+                Size s = new Size();
+                s.Height = newFrame.Height;
+                s.Width = (int)(ratio * newFrame.Width * ((double)originalFrame.Width / originalFrame.Height));
+                return s;
+            }
+        }
     }
 }
