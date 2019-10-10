@@ -15,6 +15,9 @@ namespace ImgTrack
         public int R;
         public int G;
         public int B;
+        public int Rcount;
+        public int Gcount;
+        public int Bcount;
         public int N;
         private Image img;
         private Bitmap bt;
@@ -84,6 +87,32 @@ namespace ImgTrack
             Oimg = new Bitmap(img);
             ChartUtil.MakeIntoHistogram(chart_histogram, img);
             ChangeImage();
+            for (int y = 0; y < bt.Height; y++)
+            {
+                for (int x = 0; x < bt.Width; x++)
+                {
+                    Color c = Oimg.GetPixel(x, y);
+                    Rcount = c.R + Rcount;
+                    Gcount = c.G + Gcount;
+                    Bcount = c.B + Bcount;
+                    
+                    /*if (c.R>c.G && c.R>c.B)
+                    {
+                        Rcount = Rcount + 1;
+                    }
+                    if (c.G>c.R && c.G>c.B)
+                    {
+                        Gcount = Gcount + 1;
+                    }
+                    if (c.B>c.G && c.B>c.R)
+                    {
+                        Bcount = Bcount + 1;
+                    } */
+                }
+            }
+            int total = (Rcount + Bcount + Gcount);
+            /* panelAvg.BackColor = Color.FromArgb((int)((double)Rcount / total * 255), (int)((double)Gcount / total * 255), (int)((double)Bcount / total * 255)); */
+            panelAvg.BackColor = Color.FromArgb((int)(((double)Rcount / total) * 255), (int)(((double)Gcount / total) * 255), (int)(((double)Bcount / total) * 255));
         }
 
         public Color GetSelectedColor()
