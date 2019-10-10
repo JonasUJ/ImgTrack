@@ -17,7 +17,8 @@ namespace ImgTrack
     {
         private Webcam wc;
         private Image curimg;
-        public Color color = Color.Black;
+        public Color color = Color.FromArgb(180, 180, 180);
+        public int N = 50;
 
         public Form1()
         {
@@ -56,6 +57,7 @@ namespace ImgTrack
                         var imported_colors = reader.ReadLine();
                         string[] colors = imported_colors.Split(',');
                         color = Color.FromArgb(Convert.ToInt32(colors[0]), Convert.ToInt32(colors[1]), Convert.ToInt32(colors[2]));
+                        N = Convert.ToInt32(colors[3]);
                     }
                     catch (Exception)
                     {
@@ -68,7 +70,7 @@ namespace ImgTrack
         private void exportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var csv = new StringBuilder();
-            var new_line = string.Format("{0},{1},{2}", color.R, color.B, color.G);
+            var new_line = string.Format("{0},{1},{2},{3}", color.R, color.B, color.G,N);
             csv.Append(new_line);
 
             SaveFileDialog dialog = new SaveFileDialog();
@@ -90,10 +92,11 @@ namespace ImgTrack
             Image img;
             if (curimg == null) img = pb_left.Image;
             else img = curimg.Clone() as Bitmap;
-            FormSettings fsettings = new FormSettings(img, color);
+            FormSettings fsettings = new FormSettings(img, color, N);
             if (fsettings.ShowDialog(this) == DialogResult.OK)
             {
                 color = fsettings.GetSelectedColor();
+                N = fsettings.GetAccuracy();
             }
         }
 

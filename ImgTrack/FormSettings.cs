@@ -23,16 +23,18 @@ namespace ImgTrack
         private Bitmap bt;
         private Bitmap Oimg;
 
-        public FormSettings(Image img, Color color)
+        public FormSettings(Image img, Color color, int N)
         {
             InitializeComponent();
             this.img = img;
             trackBarR.Value = color.R;
             trackBarG.Value = color.G;
             trackBarB.Value = color.B;
+            trackN.Value = N;
             R = color.R;
             G = color.G;
             B = color.B;
+            this.N = N;
             labelRed.Text = $"Red: {R}";
             labelGreen.Text = $"Green: {G}";
             labelBlue.Text = $"Blue: {B}";
@@ -118,6 +120,11 @@ namespace ImgTrack
         public Color GetSelectedColor()
         {
             return Color.FromArgb(R,B,G);
+        }
+
+        public int GetAccuracy()
+        {
+            return N;
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
