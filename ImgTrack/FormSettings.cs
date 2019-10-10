@@ -16,9 +16,6 @@ namespace ImgTrack
         public int G;
         public int B;
         public int N;
-        public double Rp;
-        public double Gp;
-        public double Bp;
         private Image img;
         private Bitmap bt;
         private Bitmap Oimg;
