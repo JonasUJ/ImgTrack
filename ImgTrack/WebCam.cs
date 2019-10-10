@@ -75,14 +75,21 @@ namespace ImgTrack
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap bitmap = ResizeCopy(eventArgs.Frame);
-            pb.Invoke((MethodInvoker)delegate
+            try
             {
-                if (pb.Image != null)
+                pb.Invoke((MethodInvoker)delegate
                 {
-                    pb.Image.Dispose();
-                }
-                pb.Image = bitmap;
-            });
+                    if (pb.Image != null)
+                    {
+                        pb.Image.Dispose();
+                    }
+                    pb.Image = bitmap;
+                });
+            }
+            catch (System.ComponentModel.InvalidAsynchronousStateException)
+            {
+                // Form was closed before the invoke finished execution
+            }
         }
 
         //close the device safely

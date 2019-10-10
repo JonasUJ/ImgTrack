@@ -68,8 +68,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pb_right);
-            this.splitContainer1.Size = new System.Drawing.Size(776, 358);
-            this.splitContainer1.SplitterDistance = 379;
+            this.splitContainer1.Size = new System.Drawing.Size(760, 287);
+            this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.TabIndex = 0;
             // 
             // pb_left
@@ -77,7 +77,8 @@
             this.pb_left.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb_left.Location = new System.Drawing.Point(0, 0);
             this.pb_left.Name = "pb_left";
-            this.pb_left.Size = new System.Drawing.Size(377, 356);
+            this.pb_left.Size = new System.Drawing.Size(369, 285);
+            this.pb_left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_left.TabIndex = 0;
             this.pb_left.TabStop = false;
             // 
@@ -86,14 +87,16 @@
             this.pb_right.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pb_right.Location = new System.Drawing.Point(0, 0);
             this.pb_right.Name = "pb_right";
-            this.pb_right.Size = new System.Drawing.Size(391, 356);
+            this.pb_right.Size = new System.Drawing.Size(383, 285);
+            this.pb_right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_right.TabIndex = 0;
             this.pb_right.TabStop = false;
+            this.pb_right.Resize += new System.EventHandler(this.Pb_Resize);
             // 
             // btn_capture
             // 
             this.btn_capture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_capture.Location = new System.Drawing.Point(11, 398);
+            this.btn_capture.Location = new System.Drawing.Point(11, 327);
             this.btn_capture.Margin = new System.Windows.Forms.Padding(2);
             this.btn_capture.Name = "btn_capture";
             this.btn_capture.Size = new System.Drawing.Size(75, 23);
@@ -111,7 +114,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -183,12 +186,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 432);
+            this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.btn_capture);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ImgTrack";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

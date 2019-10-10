@@ -78,6 +78,7 @@ namespace ImgTrack
                 }
             }
             pictureBoxPreview.Image = bt;
+            panelColor.BackColor = Color.FromArgb(R, G, B);
         }
 
         private void FormSettings_Load(object sender, EventArgs e)
