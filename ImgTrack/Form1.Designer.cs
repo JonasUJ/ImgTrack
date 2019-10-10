@@ -70,9 +70,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pb_right);
-            this.splitContainer1.Size = new System.Drawing.Size(1013, 353);
-            this.splitContainer1.SplitterDistance = 494;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(760, 287);
+            this.splitContainer1.SplitterDistance = 370;
             this.splitContainer1.TabIndex = 0;
             // 
             // pb_left
@@ -81,7 +80,7 @@
             this.pb_left.Location = new System.Drawing.Point(0, 0);
             this.pb_left.Margin = new System.Windows.Forms.Padding(4);
             this.pb_left.Name = "pb_left";
-            this.pb_left.Size = new System.Drawing.Size(492, 351);
+            this.pb_left.Size = new System.Drawing.Size(368, 285);
             this.pb_left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_left.TabIndex = 0;
             this.pb_left.TabStop = false;
@@ -92,7 +91,7 @@
             this.pb_right.Location = new System.Drawing.Point(0, 0);
             this.pb_right.Margin = new System.Windows.Forms.Padding(4);
             this.pb_right.Name = "pb_right";
-            this.pb_right.Size = new System.Drawing.Size(512, 351);
+            this.pb_right.Size = new System.Drawing.Size(384, 285);
             this.pb_right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_right.TabIndex = 0;
             this.pb_right.TabStop = false;
@@ -101,10 +100,10 @@
             // btn_capture
             // 
             this.btn_capture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_capture.Location = new System.Drawing.Point(15, 402);
-            this.btn_capture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_capture.Location = new System.Drawing.Point(11, 327);
+            this.btn_capture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_capture.Name = "btn_capture";
-            this.btn_capture.Size = new System.Drawing.Size(100, 28);
+            this.btn_capture.Size = new System.Drawing.Size(75, 23);
             this.btn_capture.TabIndex = 1;
             this.btn_capture.Text = "&Capture";
             this.btn_capture.UseVisualStyleBackColor = true;
@@ -118,8 +117,8 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1045, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -131,7 +130,7 @@
             this.openImageToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // importSettingsToolStripMenuItem
@@ -167,7 +166,7 @@
             this.thresholdToolStripMenuItem,
             this.videoToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "&Settings";
             // 
             // thresholdToolStripMenuItem
@@ -190,9 +189,11 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(121, 402);
+            this.btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_save.Location = new System.Drawing.Point(91, 327);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(99, 28);
+            this.btn_save.Size = new System.Drawing.Size(74, 23);
             this.btn_save.TabIndex = 3;
             this.btn_save.Text = "&Save Image";
             this.btn_save.UseVisualStyleBackColor = true;
@@ -200,15 +201,14 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 444);
+            this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.btn_capture);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1061, 481);
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "Form1";
             this.Text = "ImgTrack";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
