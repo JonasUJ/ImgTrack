@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -135,6 +136,16 @@ namespace ImgTrack
                 s.Height = newFrame.Height;
                 s.Width = (int)(ratio * newFrame.Width * ((double)originalFrame.Width / originalFrame.Height));
                 return s;
+            }
+        }
+        
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            if (pb_right.Image != null)
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                pb_right.Image.Save(dialog.FileName + ".png", ImageFormat.Png);
             }
         }
     }
