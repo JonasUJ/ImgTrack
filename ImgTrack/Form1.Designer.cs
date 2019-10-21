@@ -59,7 +59,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(16, 43);
+            this.splitContainer1.Location = new System.Drawing.Point(16, 28);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -70,8 +70,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pb_right);
-            this.splitContainer1.Size = new System.Drawing.Size(760, 287);
-            this.splitContainer1.SplitterDistance = 370;
+            this.splitContainer1.Size = new System.Drawing.Size(760, 304);
+            this.splitContainer1.SplitterDistance = 378;
             this.splitContainer1.TabIndex = 0;
             // 
             // pb_left
@@ -80,7 +80,7 @@
             this.pb_left.Location = new System.Drawing.Point(0, 0);
             this.pb_left.Margin = new System.Windows.Forms.Padding(4);
             this.pb_left.Name = "pb_left";
-            this.pb_left.Size = new System.Drawing.Size(368, 285);
+            this.pb_left.Size = new System.Drawing.Size(376, 302);
             this.pb_left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_left.TabIndex = 0;
             this.pb_left.TabStop = false;
@@ -91,21 +91,20 @@
             this.pb_right.Location = new System.Drawing.Point(0, 0);
             this.pb_right.Margin = new System.Windows.Forms.Padding(4);
             this.pb_right.Name = "pb_right";
-            this.pb_right.Size = new System.Drawing.Size(384, 285);
+            this.pb_right.Size = new System.Drawing.Size(376, 302);
             this.pb_right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_right.TabIndex = 0;
             this.pb_right.TabStop = false;
-            this.pb_right.Resize += new System.EventHandler(this.Pb_Resize);
             // 
             // btn_capture
             // 
             this.btn_capture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_capture.Location = new System.Drawing.Point(11, 327);
-            this.btn_capture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_capture.Location = new System.Drawing.Point(11, 338);
+            this.btn_capture.Margin = new System.Windows.Forms.Padding(2);
             this.btn_capture.Name = "btn_capture";
             this.btn_capture.Size = new System.Drawing.Size(75, 23);
             this.btn_capture.TabIndex = 1;
-            this.btn_capture.Text = "&Capture";
+            this.btn_capture.Text = "&Tag Billede";
             this.btn_capture.UseVisualStyleBackColor = true;
             this.btn_capture.Click += new System.EventHandler(this.Btn_capture_Click);
             // 
@@ -130,35 +129,35 @@
             this.openImageToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(31, 20);
+            this.fileToolStripMenuItem.Text = "&Fil";
             // 
             // importSettingsToolStripMenuItem
             // 
             this.importSettingsToolStripMenuItem.Name = "importSettingsToolStripMenuItem";
-            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.importSettingsToolStripMenuItem.Text = "&Import Settings";
+            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.importSettingsToolStripMenuItem.Text = "&Imporér Indstillinger";
             this.importSettingsToolStripMenuItem.Click += new System.EventHandler(this.importSettingsToolStripMenuItem_Click);
             // 
             // exportSettingsToolStripMenuItem
             // 
             this.exportSettingsToolStripMenuItem.Name = "exportSettingsToolStripMenuItem";
-            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.exportSettingsToolStripMenuItem.Text = "&Export Settings";
+            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.exportSettingsToolStripMenuItem.Text = "&Exportér Indstillinger";
             this.exportSettingsToolStripMenuItem.Click += new System.EventHandler(this.exportSettingsToolStripMenuItem_Click);
             // 
             // openImageToolStripMenuItem
             // 
             this.openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.openImageToolStripMenuItem.Text = "&Open Image";
+            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.openImageToolStripMenuItem.Text = "Å&ben Billede";
             this.openImageToolStripMenuItem.Click += new System.EventHandler(this.openImageToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.exitToolStripMenuItem.Text = "&Afslut";
             // 
             // settingsToolStripMenuItem
             // 
@@ -166,20 +165,20 @@
             this.thresholdToolStripMenuItem,
             this.videoToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "&Settings";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.settingsToolStripMenuItem.Text = "&Indstillinger";
             // 
             // thresholdToolStripMenuItem
             // 
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.thresholdToolStripMenuItem.Text = "&Threshold";
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thresholdToolStripMenuItem.Text = "&Grænse";
             this.thresholdToolStripMenuItem.Click += new System.EventHandler(this.thresholdToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.videoToolStripMenuItem.Text = "&Video";
             this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
@@ -190,12 +189,12 @@
             // btn_save
             // 
             this.btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_save.Location = new System.Drawing.Point(91, 327);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_save.Location = new System.Drawing.Point(91, 338);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(2);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(74, 23);
             this.btn_save.TabIndex = 3;
-            this.btn_save.Text = "&Save Image";
+            this.btn_save.Text = "&Gem Billede";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
@@ -203,7 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 361);
+            this.ClientSize = new System.Drawing.Size(784, 372);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.btn_capture);
             this.Controls.Add(this.splitContainer1);

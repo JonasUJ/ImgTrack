@@ -23,6 +23,8 @@ namespace ImgTrack
         public Form1()
         {
             InitializeComponent();
+            pb_left.SizeChanged += new EventHandler(Resizer.PictureboxResize);
+            pb_right.SizeChanged += new EventHandler(Resizer.PictureboxResize);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,9 +35,9 @@ namespace ImgTrack
 
         private void Btn_capture_Click(object sender, EventArgs e)
         {
-            if (curimg != null) curimg.Dispose();
-            curimg = pb_left.Image.Clone() as Bitmap;
+            curimg = wc.CurrentImage.Clone() as Bitmap;
             pb_right.Image = curimg;
+            pb_right.Tag = curimg;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,7 +48,7 @@ namespace ImgTrack
         private void importSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Kore ga... Requiem da";
+            dialog.Title = "Importér en fil med indstillinger";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var open_file = dialog.FileName;
@@ -75,7 +77,7 @@ namespace ImgTrack
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "CSV|.csv";
-            dialog.Title = "I reject my humanity, JoJo!";
+            dialog.Title = "Exportér en fil med indstillinger";
 
             StreamWriter writer = null;
 
@@ -113,35 +115,6 @@ namespace ImgTrack
         {
             wc.SetResolution(((VideoSettings)e.Argument).GetSelection());
         }
-
-        private void Pb_Resize(object sender, EventArgs e)
-        {
-            PictureBox pb = sender as PictureBox;
-            if (curimg == null) return;
-            Size newsize = ResizeFrame(curimg.Size, pb.Size);
-            Console.WriteLine(pb.Size);
-            pb.Image = new Bitmap(curimg, newsize);
-        }
-
-        private Size ResizeFrame(Size originalFrame, Size newFrame)
-        {
-            if (newFrame.Height / (double)originalFrame.Height >= newFrame.Width / (double)originalFrame.Width)
-            {
-                double ratio = (double)newFrame.Width / newFrame.Height;
-                Size s = new Size();
-                s.Width = newFrame.Width;
-                s.Height = (int)(ratio * newFrame.Height * ((double)originalFrame.Height / originalFrame.Width));
-                return s;
-            }
-            else
-            {
-                double ratio = (double)newFrame.Height / newFrame.Width;
-                Size s = new Size();
-                s.Height = newFrame.Height;
-                s.Width = (int)(ratio * newFrame.Width * ((double)originalFrame.Width / originalFrame.Height));
-                return s;
-            }
-        }
         
         private void btn_save_Click(object sender, EventArgs e)
         {
@@ -156,7 +129,7 @@ namespace ImgTrack
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Pick your poison, Lad";
+            dialog.Title = "Åben en billedefil";
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {

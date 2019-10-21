@@ -38,33 +38,30 @@ namespace ImgTrack
             labelRed.Text = $"Red: {R}";
             labelGreen.Text = $"Green: {G}";
             labelBlue.Text = $"Blue: {B}";
+            pb_preview.SizeChanged += new EventHandler(Resizer.PictureboxResize);
         }
 
         private void trackBarR_Scroll(object sender, EventArgs e)
         {
             R = trackBarR.Value;
             labelRed.Text = $"Red: {R}";
-            ChangeImage();
         }
 
         private void trackBarG_Scroll(object sender, EventArgs e)
         {
             G = trackBarG.Value;
             labelGreen.Text = $"Green: {G}";
-            ChangeImage();
         }
 
         private void trackBarB_Scroll(object sender, EventArgs e)
         {
             B = trackBarB.Value;
             labelBlue.Text = $"Blue: {B}";
-            ChangeImage();
         }
 
         private void trackN_Scroll(object sender, EventArgs e)
         {
             N = trackN.Value;
-            ChangeImage();
         }
 
         private void ChangeImage()
@@ -75,13 +72,14 @@ namespace ImgTrack
                 for (int x = 0; x < bt.Width; x++)
                 {
                     Color c = Oimg.GetPixel(x, y);
-                    //bt.SetPixel(x, y, Color.FromArgb((int)(c.R*Rp), (int)(c.G*Gp), (int)(c.B*Bp)));
-                    bt.SetPixel(x, y, (c.R > R-N && c.R < R + N && c.G > G-N && c.G < G + N && c.B > B-N && c.B < B+N ) ? Color.White : Color.Black);
+                    bt.SetPixel(x, y, (c.R > R-N && c.R < R+N && c.G > G-N && c.G < G+N && c.B > B-N && c.B < B+N ) ? Color.White : Color.Black);
                 }
             }
             panelColor.BackColor = Color.FromArgb(R, G, B);
             ImageData imgd = new ImageData(bt);
-            pictureBoxPreview.Image = imgd.DrawCross();
+            Bitmap withCross = imgd.DrawCross();
+            pb_preview.Tag = withCross;
+            pb_preview.Image = new Bitmap(withCross, Resizer.ResizeFrame(withCross.Size, pb_preview.Size));
         }
 
         private void FormSettings_Load(object sender, EventArgs e)
@@ -98,23 +96,9 @@ namespace ImgTrack
                     Rcount = c.R + Rcount;
                     Gcount = c.G + Gcount;
                     Bcount = c.B + Bcount;
-                    
-                    /*if (c.R>c.G && c.R>c.B)
-                    {
-                        Rcount = Rcount + 1;
-                    }
-                    if (c.G>c.R && c.G>c.B)
-                    {
-                        Gcount = Gcount + 1;
-                    }
-                    if (c.B>c.G && c.B>c.R)
-                    {
-                        Bcount = Bcount + 1;
-                    } */
                 }
             }
             int total = (Rcount + Bcount + Gcount);
-            /* panelAvg.BackColor = Color.FromArgb((int)((double)Rcount / total * 255), (int)((double)Gcount / total * 255), (int)((double)Bcount / total * 255)); */
             panelAvg.BackColor = Color.FromArgb((int)(((double)Rcount / total) * 255), (int)(((double)Gcount / total) * 255), (int)(((double)Bcount / total) * 255));
         }
 
@@ -136,6 +120,11 @@ namespace ImgTrack
         private void ButtonApply_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Tb_MouseUp(object sender, MouseEventArgs e)
+        {
+            ChangeImage();
         }
     }
 }

@@ -10,9 +10,10 @@ namespace ImgTrack
 {
     public class Webcam
     {
-        private FilterInfoCollection videoDevices = null;       //list of all videosources connected to the pc
-        public VideoCaptureDevice videoSource = null;          //the selected videosource
+        private FilterInfoCollection videoDevices = null; //list of all videosources connected to the pc
+        public VideoCaptureDevice videoSource = null; //the selected videosource
         private PictureBox pb;
+        public Bitmap CurrentImage { get; private set; }
 
         public double Width { get => videoSource.VideoResolution.FrameSize.Width; }
         public double Height { get => videoSource.VideoResolution.FrameSize.Height; }
@@ -22,19 +23,19 @@ namespace ImgTrack
             this.pb = pb;
         }
 
-        // get the devices names cconnected to the pc
+        // get the devices names connected to the pc
         private FilterInfoCollection getCamList()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             return videoDevices;
         }
 
-        //start the camera
+        // start the camera
         public void Start()
         {
-            //raise an exception incase no video device is found
-            //or else initialise the videosource variable with the harware device
-            //and other desired parameters.
+            // raise an exception incase no video device is found
+            // or else initialise the videosource variable with the harware device
+            // and other desired parameters.
             if (getCamList().Count == 0)
                 throw new Exception("Video device not found");
             else
@@ -52,7 +53,7 @@ namespace ImgTrack
             Thread stopper = new Thread(delegate()
             {
                 videoSource.SignalToStop();
-            videoSource.WaitForStop();
+                videoSource.WaitForStop();
             });
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             stopper.Start();
@@ -95,10 +96,10 @@ namespace ImgTrack
             return newImage;
         }
 
-        //eventhandler if new frame is ready
+        // eventhandler if new frame is ready
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Bitmap bitmap = ResizeCopy(eventArgs.Frame);
+            CurrentImage = ResizeCopy(eventArgs.Frame);
             try
             {
                 pb.Invoke((MethodInvoker)delegate
@@ -106,8 +107,10 @@ namespace ImgTrack
                     if (pb.Image != null)
                     {
                         pb.Image.Dispose();
+                        ((Bitmap)pb.Tag).Dispose();
                     }
-                    pb.Image = bitmap;
+                    pb.Image = CurrentImage;
+                    pb.Tag = CurrentImage;
                 });
             }
             catch (System.ComponentModel.InvalidAsynchronousStateException)
@@ -116,7 +119,7 @@ namespace ImgTrack
             }
         }
 
-        //close the device safely
+        // close the device safely
         public void Stop()
         {
             if (videoSource != null && videoSource.IsRunning)
@@ -124,6 +127,38 @@ namespace ImgTrack
                 videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
                 videoSource.SignalToStop();
                 videoSource = null;
+            }
+        }
+    }
+
+    public static class Resizer
+    {
+        public static void PictureboxResize(object sender, EventArgs e)
+        {
+            PictureBox pb = sender as PictureBox;
+            Bitmap bmp = pb.Tag as Bitmap;
+            if (bmp == null) return;
+            Size newsize = ResizeFrame(bmp.Size, pb.Size);
+            pb.Image = new Bitmap(bmp, newsize);
+        }
+
+        public static Size ResizeFrame(Size originalFrame, Size newFrame)
+        {
+            if (newFrame.Height / (double)originalFrame.Height >= newFrame.Width / (double)originalFrame.Width)
+            {
+                double ratio = (double)newFrame.Width / newFrame.Height;
+                Size s = new Size();
+                s.Width = newFrame.Width;
+                s.Height = (int)(ratio * newFrame.Height * ((double)originalFrame.Height / originalFrame.Width));
+                return s;
+            }
+            else
+            {
+                double ratio = (double)newFrame.Height / newFrame.Width;
+                Size s = new Size();
+                s.Height = newFrame.Height;
+                s.Width = (int)(ratio * newFrame.Width * ((double)originalFrame.Width / originalFrame.Height));
+                return s;
             }
         }
     }

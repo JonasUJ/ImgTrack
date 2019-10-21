@@ -46,7 +46,7 @@
             this.groupBox1.Size = new System.Drawing.Size(359, 208);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Video Setting";
+            this.groupBox1.Text = "Videoindsilling";
             // 
             // flow_videoSettings
             // 
@@ -65,7 +65,7 @@
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(75, 23);
             this.btn_apply.TabIndex = 1;
-            this.btn_apply.Text = "&Apply";
+            this.btn_apply.Text = "&Acceptér";
             this.btn_apply.UseVisualStyleBackColor = true;
             this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
             // 
@@ -77,7 +77,7 @@
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 2;
-            this.btn_cancel.Text = "&Cancel";
+            this.btn_cancel.Text = "A&nnuller";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
@@ -94,7 +94,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "VideoSettings";
-            this.Text = "VideoSettings";
+            this.Text = "Videoindstillinger";
             this.Load += new System.EventHandler(this.VideoSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
