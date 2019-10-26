@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading;
@@ -100,6 +101,7 @@ namespace ImgTrack
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             CurrentImage = ResizeCopy(eventArgs.Frame);
+            CurrentImage.RotateFlip(RotateFlipType.Rotate180FlipY);
             try
             {
                 pb.Invoke((MethodInvoker)delegate
@@ -131,6 +133,12 @@ namespace ImgTrack
         }
     }
 
+    public struct Pixel
+    {
+        public Color Color;
+        public Point Position;
+    }
+
     public static class Resizer
     {
         public static void PictureboxResize(object sender, EventArgs e)
@@ -159,6 +167,40 @@ namespace ImgTrack
                 s.Height = newFrame.Height;
                 s.Width = (int)(ratio * newFrame.Width * ((double)originalFrame.Width / originalFrame.Height));
                 return s;
+            }
+        }
+
+        public static Size CompressedSize(Bitmap bmp, int newWidth = 200)
+        {
+            Size s = new Size();
+            double ratio = (double)bmp.Size.Height / bmp.Size.Width;
+            s.Width = newWidth;
+            s.Height = (int)(newWidth * ratio);
+            return s;
+        }
+
+        public static IEnumerable<Pixel> Compress(Bitmap bmp, int newWidth = 200)
+        {
+            Size s = CompressedSize(bmp, newWidth);
+            double wskip = (double)bmp.Size.Width / s.Width;
+            double hskip = (double)bmp.Size.Height / s.Height;
+
+            int i = 0;
+            for (double x = 0; x < bmp.Size.Width; x += wskip)
+            {
+                int j = 0;
+                if (i >= s.Width) continue;
+                for (double y = 0; y < bmp.Size.Height; y += hskip)
+                {
+                    if (j >= s.Height) continue;
+                    yield return new Pixel
+                    {
+                        Color = bmp.GetPixel((int)Math.Round(x), (int)Math.Round(y)),
+                        Position = new Point(i, j),
+                    };
+                    j++;
+                }
+                i++;
             }
         }
     }

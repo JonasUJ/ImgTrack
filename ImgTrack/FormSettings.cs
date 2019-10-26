@@ -19,8 +19,8 @@ namespace ImgTrack
         public int Gcount;
         public int Bcount;
         public int N;
+        public int C;
         private Image img;
-        private Bitmap bt;
         private Bitmap Oimg;
 
         public FormSettings(Image img, Color color, int N)
@@ -64,19 +64,40 @@ namespace ImgTrack
             N = trackN.Value;
         }
 
+        private void trackC_Scroll(object sender, EventArgs e)
+        {
+            C = trackC.Value;
+        }
+
         private void ChangeImage()
         {
             N = trackN.Value;
-            for (int y = 0; y < bt.Height; y++)
+            //for (int y = 0; y < bt.Height; y++)
+            //{
+            //    for (int x = 0; x < bt.Width; x++)
+            //    {
+            //        Color c = Oimg.GetPixel(x, y);
+            //        bt.SetPixel(x, y, (c.R > R-N && c.R < R+N && c.G > G-N && c.G < G+N && c.B > B-N && c.B < B+N ) ? Color.White : Color.Black);
+            //    }
+            //}
+
+            Size csize = Resizer.CompressedSize(Oimg, C);
+            Bitmap bmp = new Bitmap(csize.Width, csize.Height);
+            foreach (Pixel px in Resizer.Compress(Oimg, C))
             {
-                for (int x = 0; x < bt.Width; x++)
-                {
-                    Color c = Oimg.GetPixel(x, y);
-                    bt.SetPixel(x, y, (c.R > R-N && c.R < R+N && c.G > G-N && c.G < G+N && c.B > B-N && c.B < B+N ) ? Color.White : Color.Black);
-                }
+                bmp.SetPixel(
+                    px.Position.X, 
+                    px.Position.Y, 
+                    (
+                        px.Color.R > R - N && px.Color.R < R + N && 
+                        px.Color.G > G - N && px.Color.G < G + N && 
+                        px.Color.B > B - N && px.Color.B < B + N
+                    ) ? Color.White : Color.Black
+                );
             }
+
             panelColor.BackColor = Color.FromArgb(R, G, B);
-            ImageData imgd = new ImageData(bt);
+            ImageData imgd = new ImageData(bmp);
             Bitmap withCross = imgd.DrawCross();
             pb_preview.Tag = withCross;
             pb_preview.Image = new Bitmap(withCross, Resizer.ResizeFrame(withCross.Size, pb_preview.Size));
@@ -84,13 +105,16 @@ namespace ImgTrack
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            bt = new Bitmap(img);
+            Bitmap bmp = new Bitmap(img);
             Oimg = new Bitmap(img);
+            trackC.Maximum = Oimg.Width;
+            trackC.Value = trackC.Maximum / 6 + trackC.Minimum;
+            C = trackC.Value;
             ChartUtil.MakeIntoHistogram(chart_histogram, img);
             ChangeImage();
-            for (int y = 0; y < bt.Height; y++)
+            for (int y = 0; y < bmp.Height; y++)
             {
-                for (int x = 0; x < bt.Width; x++)
+                for (int x = 0; x < bmp.Width; x++)
                 {
                     Color c = Oimg.GetPixel(x, y);
                     Rcount = c.R + Rcount;

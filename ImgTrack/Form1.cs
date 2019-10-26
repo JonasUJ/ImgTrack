@@ -92,8 +92,8 @@ namespace ImgTrack
         private void thresholdToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Image img;
-            if (curimg == null) img = pb_left.Image;
-            else img = curimg.Clone() as Bitmap;
+            if (curimg == null) Btn_capture_Click(btn_capture, new EventArgs());
+            img = curimg.Clone() as Bitmap;
             FormSettings fsettings = new FormSettings(img, color, N);
             if (fsettings.ShowDialog(this) == DialogResult.OK)
             {

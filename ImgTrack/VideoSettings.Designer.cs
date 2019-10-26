@@ -94,6 +94,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "VideoSettings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Videoindstillinger";
             this.Load += new System.EventHandler(this.VideoSettings_Load);
             this.groupBox1.ResumeLayout(false);
