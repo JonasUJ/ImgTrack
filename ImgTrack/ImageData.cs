@@ -7,6 +7,12 @@ using System.Drawing;
 
 namespace ImgTrack
 {
+    public struct Pixel
+    {
+        public Color Color;
+        public Point Position;
+    }
+
     public class ImageData
     {
         public readonly int[] GreyscaleValues;
@@ -16,6 +22,30 @@ namespace ImgTrack
         public readonly int[] Rows;
         public readonly int Column;
         public readonly int Row;
+
+        public ImageData(IEnumerable<Pixel> pixels, int width, int height)
+        {
+            //GreyscaleValues = new int[256];
+            TotalPixels = width * height;
+            Columns = new int[width];
+            Rows = new int[height];
+            Bmp = new Bitmap(width, height);
+
+            foreach (Pixel px in pixels)
+            {
+                //int avg = ChartUtil.Average(px.Color);
+                //GreyscaleValues[avg]++;
+                Bmp.SetPixel(px.Position.X, px.Position.Y, px.Color);
+                if ((px.Color.R + px.Color.G + px.Color.B) == 765)
+                {
+                    Columns[px.Position.X]++;
+                    Rows[px.Position.Y]++;
+                }
+            }
+
+            Column = getMiddle(Columns);
+            Row = getMiddle(Rows);
+        }
 
         public ImageData(Image img)
         {
@@ -59,10 +89,10 @@ namespace ImgTrack
         public Bitmap DrawCross()
         {
             Bitmap b = Bmp.Clone() as Bitmap;
-            using (Graphics gr = Graphics.FromImage(b))
+            using (Graphics g = Graphics.FromImage(b))
             {
-                gr.DrawLine(Pens.Red, Column, 0, Column, b.Height);
-                gr.DrawLine(Pens.Red, 0, Row, b.Width, Row);
+                g.DrawLine(Pens.Red, Column, 0, Column, b.Height);
+                g.DrawLine(Pens.Red, 0, Row, b.Width, Row);
             }
             return b;
         }

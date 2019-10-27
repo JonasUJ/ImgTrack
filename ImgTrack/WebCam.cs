@@ -9,22 +9,40 @@ using AForge.Video.DirectShow;
 
 namespace ImgTrack
 {
+    [Serializable]
+    public class NoCameraException : Exception
+    {
+        public NoCameraException() { }
+        public NoCameraException(string message) : base(message) { }
+        public NoCameraException(string message, Exception inner) : base(message, inner) { }
+        protected NoCameraException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
+
     public class Webcam
     {
-        private FilterInfoCollection videoDevices = null; //list of all videosources connected to the pc
-        public VideoCaptureDevice videoSource = null; //the selected videosource
-        private PictureBox pb;
+        private FilterInfoCollection videoDevices = null;
+        public VideoCaptureDevice videoSource = null;
         public Bitmap CurrentImage { get; private set; }
+        private bool Busy = false;
+        private Mutex ToggleMutex = new Mutex();
 
-        public double Width { get => videoSource.VideoResolution.FrameSize.Width; }
-        public double Height { get => videoSource.VideoResolution.FrameSize.Height; }
+        public Size FrameSize { get => videoSource.VideoResolution.FrameSize; }
 
-        public Webcam(PictureBox pb)
+        public struct Cam
         {
-            this.pb = pb;
+            public PictureBox Box;
+            public Filters.Filter Filter;
+        }
+        private List<Cam> Cams;
+
+        public Webcam(List<Cam> cams)
+        {
+            Cams = cams;
         }
 
-        // get the devices names connected to the pc
+        // Get the devices names connected to the pc
         private FilterInfoCollection getCamList()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -34,11 +52,11 @@ namespace ImgTrack
         // start the camera
         public void Start()
         {
-            // raise an exception incase no video device is found
+            // Raise an exception incase no video device is found
             // or else initialise the videosource variable with the harware device
             // and other desired parameters.
             if (getCamList().Count == 0)
-                throw new Exception("Video device not found");
+                throw new NoCameraException("Video device not found");
             else
             {
                 videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
@@ -63,65 +81,71 @@ namespace ImgTrack
             videoSource.Start();
         }
 
-        private Size getWidthHeight()
+        private Bitmap Copy(Bitmap frame)
         {
-            if (pb.Height / Height >= pb.Width / Width)
-            {
-                double ratio = (double)pb.Width / pb.Height;
-                Size s = new Size();
-                s.Width = pb.Width;
-                s.Height = (int)(ratio * pb.Height * (Height / Width));
-                return s;
-            }
-            else
-            {
-                double ratio = (double)pb.Height / pb.Width;
-                Size s = new Size();
-                s.Height = pb.Height;
-                s.Width = (int)(ratio * pb.Width * (Width / Height));
-                return s;
-            }
-        }
-
-        private Bitmap ResizeCopy(Bitmap frame)
-        {
-            Size s = getWidthHeight();
-            Bitmap newImage = new Bitmap(s.Width, s.Height);
+            Bitmap newImage = new Bitmap(frame.Width, frame.Height);
             using (Graphics gr = Graphics.FromImage(newImage))
             {
                 gr.SmoothingMode = SmoothingMode.HighQuality;
                 gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                gr.DrawImage(frame, new Rectangle(0, 0, s.Width, s.Height));
+                gr.DrawImage(frame, new Rectangle(0, 0, frame.Width, frame.Height));
             }
             return newImage;
         }
 
-        // eventhandler if new frame is ready
-        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        public void ToggleCam(Cam cam)
         {
-            CurrentImage = ResizeCopy(eventArgs.Frame);
-            CurrentImage.RotateFlip(RotateFlipType.Rotate180FlipY);
-            try
+            Thread Worker = new Thread((ThreadStart)delegate
             {
-                pb.Invoke((MethodInvoker)delegate
-                {
-                    if (pb.Image != null)
-                    {
-                        pb.Image.Dispose();
-                        ((Bitmap)pb.Tag).Dispose();
-                    }
-                    pb.Image = CurrentImage;
-                    pb.Tag = CurrentImage;
-                });
-            }
-            catch (System.ComponentModel.InvalidAsynchronousStateException)
-            {
-                // Form was closed before the invoke finished execution
-            }
+                ToggleMutex.WaitOne();
+                if (Cams.Contains(cam))
+                    Cams.Remove(cam);
+                else
+                    Cams.Add(cam);
+                ToggleMutex.ReleaseMutex();
+            });
+            Worker.Start();
         }
 
-        // close the device safely
+        // EventHandler if new frame is ready
+        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            if (Busy) return;
+            CurrentImage = Copy(eventArgs.Frame);
+            CurrentImage.RotateFlip(RotateFlipType.Rotate180FlipY);
+            Thread Worker = new Thread((ThreadStart)delegate
+            {
+                ToggleMutex.WaitOne();
+                try
+                {
+                    foreach (var cam in Cams)
+                    {
+                        cam.Box.Invoke((MethodInvoker)delegate
+                        {
+                            if (cam.Box.Image != null)
+                            {
+                                cam.Box.Image.Dispose();
+                                ((Bitmap)cam.Box.Tag).Dispose();
+                            }
+                            Bitmap tmp = cam.Filter(CurrentImage);
+                            cam.Box.Image = Resizer.ResizeBitmap(tmp, Resizer.ResizeFrame(tmp.Size, cam.Box.Size));
+                            cam.Box.Tag = tmp;
+                        });
+                    }
+                }
+                catch (System.ComponentModel.InvalidAsynchronousStateException)
+                {
+                    // Form was closed before the invoke finished execution
+                }
+                ToggleMutex.ReleaseMutex();
+                Busy = false;
+            });
+            Busy = true;
+            Worker.Start();
+        }
+
+        // Close the device safely
         public void Stop()
         {
             if (videoSource != null && videoSource.IsRunning)
@@ -133,12 +157,6 @@ namespace ImgTrack
         }
     }
 
-    public struct Pixel
-    {
-        public Color Color;
-        public Point Position;
-    }
-
     public static class Resizer
     {
         public static void PictureboxResize(object sender, EventArgs e)
@@ -147,7 +165,19 @@ namespace ImgTrack
             Bitmap bmp = pb.Tag as Bitmap;
             if (bmp == null) return;
             Size newsize = ResizeFrame(bmp.Size, pb.Size);
-            pb.Image = new Bitmap(bmp, newsize);
+            pb.Image = ResizeBitmap(bmp, newsize);
+        }
+
+        public static Bitmap ResizeBitmap(Bitmap original, Size newSize)
+        {
+            Bitmap newbmp = new Bitmap(newSize.Width, newSize.Height);
+            using (Graphics g = Graphics.FromImage(newbmp))
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                g.DrawImage(original, 0, 0, newSize.Width, newSize.Height);
+            }
+            return newbmp;
         }
 
         public static Size ResizeFrame(Size originalFrame, Size newFrame)
@@ -170,7 +200,7 @@ namespace ImgTrack
             }
         }
 
-        public static Size CompressedSize(Bitmap bmp, int newWidth = 200)
+        public static Size CompressedSize(Bitmap bmp, int newWidth)
         {
             Size s = new Size();
             double ratio = (double)bmp.Size.Height / bmp.Size.Width;
@@ -179,7 +209,7 @@ namespace ImgTrack
             return s;
         }
 
-        public static IEnumerable<Pixel> Compress(Bitmap bmp, int newWidth = 200)
+        public static IEnumerable<Pixel> Compress(Bitmap bmp, int newWidth)
         {
             Size s = CompressedSize(bmp, newWidth);
             double wskip = (double)bmp.Size.Width / s.Width;
@@ -202,6 +232,39 @@ namespace ImgTrack
                 }
                 i++;
             }
+        }
+    }
+
+    public static class Filters
+    {
+        public delegate Bitmap Filter(Bitmap bmp);
+        
+        public static Bitmap NoFilter(Bitmap bmp)
+        {
+            return bmp;
+        }
+
+        private static IEnumerable<Pixel> TrackFilterIterator(Bitmap bmp, int width)
+        {
+            foreach (Pixel px in Resizer.Compress(bmp, width))
+            {
+                Pixel npx = px;
+                npx.Color = (
+                    px.Color.R > Settings.R - Settings.Accuracy && px.Color.R < Settings.R + Settings.Accuracy &&
+                    px.Color.G > Settings.G - Settings.Accuracy && px.Color.G < Settings.G + Settings.Accuracy &&
+                    px.Color.B > Settings.B - Settings.Accuracy && px.Color.B < Settings.B + Settings.Accuracy
+                ) ? Color.White : Color.Black;
+                yield return npx;
+            }
+        }
+
+        public static Bitmap TrackFilter(Bitmap bmp)
+        {
+            int width = (int)(bmp.Width * Settings.Compression);
+            Size csize = Resizer.CompressedSize(bmp, width);
+            ImageData imgd = new ImageData(TrackFilterIterator(bmp, width), csize.Width, csize.Height);
+            Bitmap withCross = imgd.DrawCross();
+            return withCross;
         }
     }
 }

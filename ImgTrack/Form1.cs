@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ImgTrack
@@ -17,27 +13,46 @@ namespace ImgTrack
     {
         private Webcam wc;
         private Image curimg;
-        public Color color = Color.FromArgb(180, 180, 180);
-        public int N = 50;
+        private Webcam.Cam TrackerCam;
 
         public Form1()
         {
             InitializeComponent();
             pb_left.SizeChanged += new EventHandler(Resizer.PictureboxResize);
             pb_right.SizeChanged += new EventHandler(Resizer.PictureboxResize);
+            TrackerCam = new Webcam.Cam
+            {
+                Box = pb_right,
+                Filter = Filters.TrackFilter
+            };
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            wc = new Webcam(pb_left);
-            wc.Start();
+            wc = new Webcam(new List<Webcam.Cam> {
+                new Webcam.Cam {
+                    Box = pb_left,
+                    Filter = Filters.NoFilter
+                }
+            });
+
+            try
+            {
+                wc.Start();
+            }
+            catch (NoCameraException)
+            {
+                MessageBox.Show("Kunne ikke finde en kamera enhed", "Intet kamera", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }
         }
 
         private void Btn_capture_Click(object sender, EventArgs e)
         {
+            if (!btn_capture.Enabled) return;
             curimg = wc.CurrentImage.Clone() as Bitmap;
-            pb_right.Image = curimg;
-            pb_right.Tag = curimg;
+            pb_right.Image = Resizer.ResizeBitmap(curimg as Bitmap, Resizer.ResizeFrame(curimg.Size, pb_right.Size));
+            pb_right.Tag = curimg.Clone() as Bitmap;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -56,10 +71,14 @@ namespace ImgTrack
                 {
                     try
                     {
-                        var imported_colors = reader.ReadLine();
-                        string[] colors = imported_colors.Split(',');
-                        color = Color.FromArgb(Convert.ToInt32(colors[0]), Convert.ToInt32(colors[1]), Convert.ToInt32(colors[2]));
-                        N = Convert.ToInt32(colors[3]);
+                        var imported_settingss = reader.ReadLine();
+                        string[] settings = imported_settingss.Split(',');
+                        Color color = Color.FromArgb(Convert.ToInt32(settings[0]), Convert.ToInt32(settings[1]), Convert.ToInt32(settings[2]));
+                        Settings.R = color.R;
+                        Settings.G = color.G;
+                        Settings.B = color.B;
+                        Settings.Accuracy = Convert.ToInt32(settings[3]);
+                        Settings.Compression = Convert.ToDouble(settings[4]);
                     }
                     catch (Exception)
                     {
@@ -71,19 +90,17 @@ namespace ImgTrack
 
         private void exportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var csv = new StringBuilder();
-            var new_line = string.Format("{0},{1},{2},{3}", color.R, color.B, color.G,N);
-            csv.Append(new_line);
+            string csv = Settings.Export();
 
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "CSV|.csv";
-            dialog.Title = "Exportér en fil med indstillinger";
-
-            StreamWriter writer = null;
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "CSV|.csv",
+                Title = "Exportér en fil med indstillinger"
+            };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                writer = new StreamWriter(dialog.FileName);
+                StreamWriter writer = new StreamWriter(dialog.FileName);
                 writer.WriteLine(csv);
                 writer.Close();
             }
@@ -94,11 +111,10 @@ namespace ImgTrack
             Image img;
             if (curimg == null) Btn_capture_Click(btn_capture, new EventArgs());
             img = curimg.Clone() as Bitmap;
-            FormSettings fsettings = new FormSettings(img, color, N);
+            FormSettings fsettings = new FormSettings(img);
             if (fsettings.ShowDialog(this) == DialogResult.OK)
             {
-                color = fsettings.GetSelectedColor();
-                N = fsettings.GetAccuracy();
+                //
             }
         }
 
@@ -115,16 +131,6 @@ namespace ImgTrack
         {
             wc.SetResolution(((VideoSettings)e.Argument).GetSelection());
         }
-        
-        private void btn_save_Click(object sender, EventArgs e)
-        {
-            if (pb_right.Image != null)
-            {
-                SaveFileDialog dialog = new SaveFileDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                pb_right.Image.Save(dialog.FileName + ".png", ImageFormat.Png);
-            }
-        }
 
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -136,10 +142,35 @@ namespace ImgTrack
                 var open_file = dialog.FileName;
                 Bitmap bt = new Bitmap(open_file);
                 pb_right.Image = bt;
+                pb_right.Tag = bt;
                 curimg = bt;
             }
+        }
 
+        private void btn_track_Click(object sender, EventArgs e)
+        {
+            if (btn_track.Text == "&Start Tracking")
+                btn_track.Text = "&Stop Tracking";
+            else
+                btn_track.Text = "&Start Tracking";
 
+            thresholdToolStripMenuItem.Enabled = !thresholdToolStripMenuItem.Enabled;
+            btn_capture.Enabled = !btn_capture.Enabled;
+            wc.ToggleCam(TrackerCam);
+        }
+
+        private void gemBilledeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pb_right.Image != null)
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    pb_right.Image.Save(dialog.FileName + ".png", ImageFormat.Png);
+            }
+            else
+            {
+                MessageBox.Show("Der er ikke blevet taget noget billede. Tag et billede og prøv igen.", "Kan ikke gemme billede", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

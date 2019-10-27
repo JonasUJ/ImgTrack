@@ -42,7 +42,8 @@
             this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgw_setres = new System.ComponentModel.BackgroundWorker();
-            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_track = new System.Windows.Forms.Button();
+            this.gemBilledeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -127,6 +128,7 @@
             this.importSettingsToolStripMenuItem,
             this.exportSettingsToolStripMenuItem,
             this.openImageToolStripMenuItem,
+            this.gemBilledeToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(31, 20);
@@ -171,14 +173,14 @@
             // thresholdToolStripMenuItem
             // 
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.thresholdToolStripMenuItem.Text = "&Grænse";
             this.thresholdToolStripMenuItem.Click += new System.EventHandler(this.thresholdToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.videoToolStripMenuItem.Text = "&Video";
             this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
@@ -186,24 +188,30 @@
             // 
             this.bgw_setres.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Bgw_setres_DoWork);
             // 
-            // btn_save
+            // btn_track
             // 
-            this.btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_save.Location = new System.Drawing.Point(91, 338);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(74, 23);
-            this.btn_save.TabIndex = 3;
-            this.btn_save.Text = "&Gem Billede";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            this.btn_track.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_track.Location = new System.Drawing.Point(680, 338);
+            this.btn_track.Name = "btn_track";
+            this.btn_track.Size = new System.Drawing.Size(92, 23);
+            this.btn_track.TabIndex = 4;
+            this.btn_track.Text = "&Start Tracking";
+            this.btn_track.UseVisualStyleBackColor = true;
+            this.btn_track.Click += new System.EventHandler(this.btn_track_Click);
+            // 
+            // gemBilledeToolStripMenuItem
+            // 
+            this.gemBilledeToolStripMenuItem.Name = "gemBilledeToolStripMenuItem";
+            this.gemBilledeToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.gemBilledeToolStripMenuItem.Text = "&Gem Billede";
+            this.gemBilledeToolStripMenuItem.Click += new System.EventHandler(this.gemBilledeToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 372);
-            this.Controls.Add(this.btn_save);
+            this.Controls.Add(this.btn_track);
             this.Controls.Add(this.btn_capture);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
@@ -241,7 +249,8 @@
         private System.Windows.Forms.ToolStripMenuItem thresholdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker bgw_setres;
-        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.Button btn_track;
+        private System.Windows.Forms.ToolStripMenuItem gemBilledeToolStripMenuItem;
     }
 }
 

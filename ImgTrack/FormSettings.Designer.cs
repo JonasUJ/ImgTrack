@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pb_preview = new System.Windows.Forms.PictureBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.panelColor = new System.Windows.Forms.Panel();
             this.buttonApply = new System.Windows.Forms.Button();
             this.trackBarB = new System.Windows.Forms.TrackBar();
@@ -45,17 +44,17 @@
             this.trackN = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.trackC = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panelAvg = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.trackC = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_preview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarG)).BeginInit();
@@ -63,8 +62,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart_histogram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackN)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackC)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pb_preview
@@ -76,18 +75,6 @@
             this.pb_preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_preview.TabIndex = 0;
             this.pb_preview.TabStop = false;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(666, 642);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "A&nnullér";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // panelColor
             // 
@@ -107,9 +94,9 @@
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(75, 23);
             this.buttonApply.TabIndex = 4;
-            this.buttonApply.Text = "&Acceptér";
+            this.buttonApply.Text = "&Luk";
             this.buttonApply.UseVisualStyleBackColor = true;
-            this.buttonApply.Click += new System.EventHandler(this.ButtonApply_Click);
+            this.buttonApply.Click += new System.EventHandler(this.CloseForm);
             // 
             // trackBarB
             // 
@@ -152,16 +139,16 @@
             // 
             // chart_histogram
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart_histogram.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart_histogram.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart_histogram.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_histogram.Legends.Add(legend1);
             this.chart_histogram.Location = new System.Drawing.Point(6, 18);
             this.chart_histogram.Name = "chart_histogram";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart_histogram.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart_histogram.Series.Add(series1);
             this.chart_histogram.Size = new System.Drawing.Size(372, 194);
             this.chart_histogram.TabIndex = 8;
             this.chart_histogram.Text = "chart1";
@@ -250,6 +237,54 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Grænseindstilling";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(336, 523);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 13);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Kvalitet";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(351, 523);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(0, 13);
+            this.label8.TabIndex = 21;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 523);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Hastighed";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 475);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Kompression";
+            // 
+            // trackC
+            // 
+            this.trackC.Location = new System.Drawing.Point(6, 491);
+            this.trackC.Maximum = 100;
+            this.trackC.Minimum = 5;
+            this.trackC.Name = "trackC";
+            this.trackC.Size = new System.Drawing.Size(372, 45);
+            this.trackC.TabIndex = 18;
+            this.trackC.TickFrequency = 5;
+            this.trackC.Value = 25;
+            this.trackC.Scroll += new System.EventHandler(this.trackC_Scroll);
+            this.trackC.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
+            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -309,54 +344,6 @@
             this.panel1.Size = new System.Drawing.Size(430, 675);
             this.panel1.TabIndex = 15;
             // 
-            // trackC
-            // 
-            this.trackC.Location = new System.Drawing.Point(6, 491);
-            this.trackC.Maximum = 50;
-            this.trackC.Minimum = 50;
-            this.trackC.Name = "trackC";
-            this.trackC.Size = new System.Drawing.Size(372, 45);
-            this.trackC.TabIndex = 18;
-            this.trackC.TickFrequency = 10;
-            this.trackC.Value = 50;
-            this.trackC.Scroll += new System.EventHandler(this.trackC_Scroll);
-            this.trackC.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 475);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Kompression";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 523);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Hastighed";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(351, 523);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(0, 13);
-            this.label8.TabIndex = 21;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(336, 523);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 13);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Kvalitet";
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,7 +352,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonApply);
-            this.Controls.Add(this.buttonCancel);
             this.MinimumSize = new System.Drawing.Size(849, 629);
             this.Name = "FormSettings";
             this.Text = "Grænseindstillinger";
@@ -378,8 +364,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackN)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackC)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -387,7 +373,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pb_preview;
-        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Panel panelColor;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.TrackBar trackBarB;
