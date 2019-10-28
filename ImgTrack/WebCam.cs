@@ -24,10 +24,19 @@ namespace ImgTrack
     {
         private FilterInfoCollection videoDevices = null;
         public VideoCaptureDevice videoSource = null;
-        public Bitmap CurrentImage { get; private set; }
         private bool Busy = false;
         private Mutex ToggleMutex = new Mutex();
 
+        public Mutex ImageMutex = new Mutex();
+        private Bitmap currentImage;
+        public Bitmap CurrentImage {
+            get
+            {
+                ImageMutex.WaitOne();
+                return currentImage;
+            }
+            private set { currentImage = value; }
+        }
         public Size FrameSize { get => videoSource.VideoResolution.FrameSize; }
 
         public struct Cam
@@ -114,7 +123,7 @@ namespace ImgTrack
             if (Busy) return;
             CurrentImage = Copy(eventArgs.Frame);
             CurrentImage.RotateFlip(RotateFlipType.Rotate180FlipY);
-            Thread Worker = new Thread((ThreadStart)delegate
+            ThreadPool.QueueUserWorkItem((WaitCallback)delegate
             {
                 ToggleMutex.WaitOne();
                 try
@@ -131,18 +140,20 @@ namespace ImgTrack
                             Bitmap tmp = cam.Filter(CurrentImage);
                             cam.Box.Image = Resizer.ResizeBitmap(tmp, Resizer.ResizeFrame(tmp.Size, cam.Box.Size));
                             cam.Box.Tag = tmp;
+                            ImageMutex.ReleaseMutex();
                         });
                     }
                 }
-                catch (System.ComponentModel.InvalidAsynchronousStateException)
+                catch (Exception ex) when (ex is InvalidOperationException ||
+                                           ex is System.ComponentModel.InvalidAsynchronousStateException)
                 {
                     // Form was closed before the invoke finished execution
                 }
                 ToggleMutex.ReleaseMutex();
                 Busy = false;
             });
+            ImageMutex.ReleaseMutex();
             Busy = true;
-            Worker.Start();
         }
 
         // Close the device safely
@@ -244,7 +255,7 @@ namespace ImgTrack
             return bmp;
         }
 
-        private static IEnumerable<Pixel> TrackFilterIterator(Bitmap bmp, int width)
+        private static IEnumerable<Pixel> TrackFilterIterator(Bitmap bmp, int width, Color nonColor)
         {
             foreach (Pixel px in Resizer.Compress(bmp, width))
             {
@@ -253,7 +264,7 @@ namespace ImgTrack
                     px.Color.R > Settings.R - Settings.Accuracy && px.Color.R < Settings.R + Settings.Accuracy &&
                     px.Color.G > Settings.G - Settings.Accuracy && px.Color.G < Settings.G + Settings.Accuracy &&
                     px.Color.B > Settings.B - Settings.Accuracy && px.Color.B < Settings.B + Settings.Accuracy
-                ) ? Color.White : Color.Black;
+                ) ? px.Color : nonColor;
                 yield return npx;
             }
         }
@@ -262,7 +273,8 @@ namespace ImgTrack
         {
             int width = (int)(bmp.Width * Settings.Compression);
             Size csize = Resizer.CompressedSize(bmp, width);
-            ImageData imgd = new ImageData(TrackFilterIterator(bmp, width), csize.Width, csize.Height);
+            Color nonColor = Settings.Color.GetBrightness() < 0.5 ? Color.White : Color.Black;
+            ImageData imgd = new ImageData(TrackFilterIterator(bmp, width, nonColor), csize.Width, csize.Height, nonColor.R + nonColor.G + nonColor.B);
             Bitmap withCross = imgd.DrawCross();
             return withCross;
         }

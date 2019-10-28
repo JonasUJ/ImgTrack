@@ -23,9 +23,9 @@ namespace ImgTrack
         public readonly int Column;
         public readonly int Row;
 
-        public ImageData(IEnumerable<Pixel> pixels, int width, int height)
+        public ImageData(IEnumerable<Pixel> pixels, int width, int height, int nonColorSum = 0)
         {
-            //GreyscaleValues = new int[256];
+            GreyscaleValues = new int[256];
             TotalPixels = width * height;
             Columns = new int[width];
             Rows = new int[height];
@@ -33,10 +33,10 @@ namespace ImgTrack
 
             foreach (Pixel px in pixels)
             {
-                //int avg = ChartUtil.Average(px.Color);
-                //GreyscaleValues[avg]++;
+                int avg = ChartUtil.Average(px.Color);
+                GreyscaleValues[avg]++;
                 Bmp.SetPixel(px.Position.X, px.Position.Y, px.Color);
-                if ((px.Color.R + px.Color.G + px.Color.B) == 765)
+                if ((px.Color.R + px.Color.G + px.Color.B) != nonColorSum)
                 {
                     Columns[px.Position.X]++;
                     Rows[px.Position.Y]++;
@@ -47,7 +47,7 @@ namespace ImgTrack
             Row = getMiddle(Rows);
         }
 
-        public ImageData(Image img)
+        public ImageData(Image img, int nonColorSum = 0)
         {
             Bmp = new Bitmap(img.Clone() as Image);
             TotalPixels = Bmp.Width * Bmp.Height;
@@ -62,7 +62,7 @@ namespace ImgTrack
                     Color color = Bmp.GetPixel(x, y);
                     int avg = ChartUtil.Average(color);
                     GreyscaleValues[avg]++;
-                    if ((color.R + color.G + color.B) == 765)
+                    if ((color.R + color.G + color.B) != 0)
                     {
                         Columns[x]++;
                         Rows[y]++;

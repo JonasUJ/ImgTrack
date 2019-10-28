@@ -4,6 +4,7 @@ namespace ImgTrack
 {
     public static class Settings
     {
+        public static Color Color { get => Color.FromArgb(R, G, B); }
         public static byte R = 180;
         public static byte G = 180;
         public static byte B = 180;

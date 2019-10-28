@@ -11,6 +11,7 @@ namespace ImgTrack
         public int Bcount;
         private Image img;
         private Bitmap Oimg;
+        private bool picking = false;
 
         public FormSettings(Image img)
         {
@@ -21,9 +22,9 @@ namespace ImgTrack
             trackBarB.Value = Settings.B;
             trackN.Value = Settings.Accuracy;
             trackC.Value = (int)(Settings.Compression * 100);
-            labelRed.Text = $"Red: {Settings.R}";
-            labelGreen.Text = $"Green: {Settings.G}";
-            labelBlue.Text = $"Blue: {Settings.B}";
+            labelRed.Text = $"Rød: {Settings.R}";
+            labelGreen.Text = $"Grøn: {Settings.G}";
+            labelBlue.Text = $"Blå: {Settings.B}";
             pb_preview.SizeChanged += new EventHandler(Resizer.PictureboxResize);
         }
 
@@ -50,19 +51,19 @@ namespace ImgTrack
         private void trackBarR_Scroll(object sender, EventArgs e)
         {
             Settings.R = (byte)trackBarR.Value;
-            labelRed.Text = $"Red: {Settings.R}";
+            labelRed.Text = $"Rød: {Settings.R}";
         }
 
         private void trackBarG_Scroll(object sender, EventArgs e)
         {
             Settings.G = (byte)trackBarG.Value;
-            labelGreen.Text = $"Green: {Settings.G}";
+            labelGreen.Text = $"Grøn: {Settings.G}";
         }
 
         private void trackBarB_Scroll(object sender, EventArgs e)
         {
             Settings.B = (byte)trackBarB.Value;
-            labelBlue.Text = $"Blue: {Settings.B}";
+            labelBlue.Text = $"Blå: {Settings.B}";
         }
 
         private void trackN_Scroll(object sender, EventArgs e)
@@ -91,6 +92,44 @@ namespace ImgTrack
         private void CloseForm(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_picker_Click(object sender, EventArgs e)
+        {
+            if (picking)
+            {
+                btn_picker.BackColor = SystemColors.Control;
+                gb_settings.Enabled = true;
+                ChangeImage();
+            }
+            else
+            {
+                gb_settings.Enabled = false;
+                btn_picker.BackColor = Color.FromArgb(30, 180, 30);
+                pb_preview.Image = Resizer.ResizeBitmap(Oimg, Resizer.ResizeFrame(Oimg.Size, pb_preview.Size)); ;
+                pb_preview.Tag = Oimg;
+            }
+            picking = !picking;
+        }
+
+        private void pb_preview_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!picking) return;
+            Bitmap pbimg = pb_preview.Image as Bitmap;
+            int x = e.X - (pb_preview.Width - pbimg.Width) / 2;
+            int y = e.Y - (pb_preview.Height - pbimg.Height) / 2;
+            if (!(x >= 0 && y >= 0 && x <= pbimg.Width && y <= pbimg.Height)) return;
+            btn_picker.BackColor = SystemColors.Control;
+            gb_settings.Enabled = true;
+            picking = false;
+            Color color = pbimg.GetPixel(x, y);
+            Settings.R = color.R;
+            Settings.G = color.G;
+            Settings.B = color.B;
+            trackBarR.Value = Settings.R;
+            trackBarG.Value = Settings.G;
+            trackBarB.Value = Settings.B;
+            ChangeImage();
         }
     }
 }

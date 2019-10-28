@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.pb_preview = new System.Windows.Forms.PictureBox();
             this.panelColor = new System.Windows.Forms.Panel();
             this.buttonApply = new System.Windows.Forms.Button();
@@ -43,7 +45,7 @@
             this.labelBlue = new System.Windows.Forms.Label();
             this.trackN = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gb_settings = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,13 +57,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_picker = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_preview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_histogram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackN)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gb_settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackC)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +79,7 @@
             this.pb_preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb_preview.TabIndex = 0;
             this.pb_preview.TabStop = false;
+            this.pb_preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb_preview_MouseClick);
             // 
             // panelColor
             // 
@@ -95,6 +100,7 @@
             this.buttonApply.Size = new System.Drawing.Size(75, 23);
             this.buttonApply.TabIndex = 4;
             this.buttonApply.Text = "&Luk";
+            this.toolTip.SetToolTip(this.buttonApply, "Luk vinduet, indstillingerne er blevet gemt");
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.CloseForm);
             // 
@@ -107,6 +113,7 @@
             this.trackBarB.Name = "trackBarB";
             this.trackBarB.Size = new System.Drawing.Size(372, 45);
             this.trackBarB.TabIndex = 5;
+            this.toolTip.SetToolTip(this.trackBarB, "Blå-komponenten i den valgte farve");
             this.trackBarB.Value = 180;
             this.trackBarB.Scroll += new System.EventHandler(this.trackBarB_Scroll);
             this.trackBarB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
@@ -120,6 +127,7 @@
             this.trackBarG.Name = "trackBarG";
             this.trackBarG.Size = new System.Drawing.Size(372, 45);
             this.trackBarG.TabIndex = 6;
+            this.toolTip.SetToolTip(this.trackBarG, "Grøn-komponenten i den valgte farve");
             this.trackBarG.Value = 180;
             this.trackBarG.Scroll += new System.EventHandler(this.trackBarG_Scroll);
             this.trackBarG.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
@@ -133,6 +141,7 @@
             this.trackBarR.Name = "trackBarR";
             this.trackBarR.Size = new System.Drawing.Size(372, 45);
             this.trackBarR.TabIndex = 7;
+            this.toolTip.SetToolTip(this.trackBarR, "Rød-komponenten i den valgte farve");
             this.trackBarR.Value = 180;
             this.trackBarR.Scroll += new System.EventHandler(this.trackBarR_Scroll);
             this.trackBarR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
@@ -152,6 +161,7 @@
             this.chart_histogram.Size = new System.Drawing.Size(372, 194);
             this.chart_histogram.TabIndex = 8;
             this.chart_histogram.Text = "chart1";
+            this.toolTip.SetToolTip(this.chart_histogram, "Histogram over gennemsnittet af billedets rød-grøn-blå komponenter");
             // 
             // labelRed
             // 
@@ -160,25 +170,25 @@
             this.labelRed.Name = "labelRed";
             this.labelRed.Size = new System.Drawing.Size(27, 13);
             this.labelRed.TabIndex = 9;
-            this.labelRed.Text = "Red";
+            this.labelRed.Text = "Rød";
             // 
             // labelGreen
             // 
             this.labelGreen.AutoSize = true;
             this.labelGreen.Location = new System.Drawing.Point(3, 279);
             this.labelGreen.Name = "labelGreen";
-            this.labelGreen.Size = new System.Drawing.Size(36, 13);
+            this.labelGreen.Size = new System.Drawing.Size(30, 13);
             this.labelGreen.TabIndex = 10;
-            this.labelGreen.Text = "Green";
+            this.labelGreen.Text = "Grøn";
             // 
             // labelBlue
             // 
             this.labelBlue.AutoSize = true;
             this.labelBlue.Location = new System.Drawing.Point(3, 343);
             this.labelBlue.Name = "labelBlue";
-            this.labelBlue.Size = new System.Drawing.Size(28, 13);
+            this.labelBlue.Size = new System.Drawing.Size(22, 13);
             this.labelBlue.TabIndex = 11;
-            this.labelBlue.Text = "Blue";
+            this.labelBlue.Text = "Blå";
             // 
             // trackN
             // 
@@ -192,6 +202,8 @@
             this.trackN.Size = new System.Drawing.Size(372, 45);
             this.trackN.TabIndex = 12;
             this.trackN.TickFrequency = 2;
+            this.toolTip.SetToolTip(this.trackN, "Hvor præcist farven på billedet skal matche den valgte farve. Lavere nøjagtighed " +
+        "kan se et bredere spektrum af farver");
             this.trackN.Value = 50;
             this.trackN.Scroll += new System.EventHandler(this.trackN_Scroll);
             this.trackN.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
@@ -206,36 +218,36 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Nøjagtighed";
             // 
-            // groupBox1
+            // gb_settings
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gb_settings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.trackC);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.panelAvg);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.trackBarR);
-            this.groupBox1.Controls.Add(this.labelRed);
-            this.groupBox1.Controls.Add(this.chart_histogram);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.labelBlue);
-            this.groupBox1.Controls.Add(this.trackN);
-            this.groupBox1.Controls.Add(this.labelGreen);
-            this.groupBox1.Controls.Add(this.trackBarG);
-            this.groupBox1.Controls.Add(this.trackBarB);
-            this.groupBox1.Controls.Add(this.panelColor);
-            this.groupBox1.Location = new System.Drawing.Point(436, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(386, 624);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Grænseindstilling";
+            this.gb_settings.Controls.Add(this.label9);
+            this.gb_settings.Controls.Add(this.label8);
+            this.gb_settings.Controls.Add(this.label7);
+            this.gb_settings.Controls.Add(this.label6);
+            this.gb_settings.Controls.Add(this.trackC);
+            this.gb_settings.Controls.Add(this.label5);
+            this.gb_settings.Controls.Add(this.label4);
+            this.gb_settings.Controls.Add(this.panelAvg);
+            this.gb_settings.Controls.Add(this.label3);
+            this.gb_settings.Controls.Add(this.label2);
+            this.gb_settings.Controls.Add(this.trackBarR);
+            this.gb_settings.Controls.Add(this.labelRed);
+            this.gb_settings.Controls.Add(this.chart_histogram);
+            this.gb_settings.Controls.Add(this.label1);
+            this.gb_settings.Controls.Add(this.labelBlue);
+            this.gb_settings.Controls.Add(this.trackN);
+            this.gb_settings.Controls.Add(this.labelGreen);
+            this.gb_settings.Controls.Add(this.trackBarG);
+            this.gb_settings.Controls.Add(this.trackBarB);
+            this.gb_settings.Controls.Add(this.panelColor);
+            this.gb_settings.Location = new System.Drawing.Point(436, 12);
+            this.gb_settings.Name = "gb_settings";
+            this.gb_settings.Size = new System.Drawing.Size(386, 624);
+            this.gb_settings.TabIndex = 14;
+            this.gb_settings.TabStop = false;
+            this.gb_settings.Text = "Grænseindstilling";
             // 
             // label9
             // 
@@ -281,6 +293,8 @@
             this.trackC.Size = new System.Drawing.Size(372, 45);
             this.trackC.TabIndex = 18;
             this.trackC.TickFrequency = 5;
+            this.toolTip.SetToolTip(this.trackC, "Hvor meget billedet skal komprimeres, fra 0% til 95%. Høj komprimering giver hurt" +
+        "igere tracking");
             this.trackC.Value = 25;
             this.trackC.Scroll += new System.EventHandler(this.trackC_Scroll);
             this.trackC.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseUp);
@@ -344,15 +358,29 @@
             this.panel1.Size = new System.Drawing.Size(430, 675);
             this.panel1.TabIndex = 15;
             // 
+            // btn_picker
+            // 
+            this.btn_picker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_picker.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_picker.Image = ((System.Drawing.Image)(resources.GetObject("btn_picker.Image")));
+            this.btn_picker.Location = new System.Drawing.Point(446, 569);
+            this.btn_picker.Name = "btn_picker";
+            this.btn_picker.Size = new System.Drawing.Size(30, 30);
+            this.btn_picker.TabIndex = 0;
+            this.toolTip.SetToolTip(this.btn_picker, "Vælg en farve fra billedet med musepilen");
+            this.btn_picker.UseVisualStyleBackColor = false;
+            this.btn_picker.Click += new System.EventHandler(this.btn_picker_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 677);
+            this.Controls.Add(this.btn_picker);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gb_settings);
             this.Controls.Add(this.buttonApply);
-            this.MinimumSize = new System.Drawing.Size(849, 629);
+            this.MinimumSize = new System.Drawing.Size(849, 716);
             this.Name = "FormSettings";
             this.Text = "Grænseindstillinger";
             this.Load += new System.EventHandler(this.FormSettings_Load);
@@ -362,8 +390,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_histogram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackN)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gb_settings.ResumeLayout(false);
+            this.gb_settings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackC)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -384,7 +412,7 @@
         private System.Windows.Forms.Label labelBlue;
         private System.Windows.Forms.TrackBar trackN;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gb_settings;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
@@ -396,5 +424,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar trackC;
+        private System.Windows.Forms.Button btn_picker;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

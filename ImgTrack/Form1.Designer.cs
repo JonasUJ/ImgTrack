@@ -37,13 +37,13 @@
             this.importSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gemBilledeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgw_setres = new System.ComponentModel.BackgroundWorker();
             this.btn_track = new System.Windows.Forms.Button();
-            this.gemBilledeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -137,28 +137,35 @@
             // importSettingsToolStripMenuItem
             // 
             this.importSettingsToolStripMenuItem.Name = "importSettingsToolStripMenuItem";
-            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.importSettingsToolStripMenuItem.Text = "&Imporér Indstillinger";
             this.importSettingsToolStripMenuItem.Click += new System.EventHandler(this.importSettingsToolStripMenuItem_Click);
             // 
             // exportSettingsToolStripMenuItem
             // 
             this.exportSettingsToolStripMenuItem.Name = "exportSettingsToolStripMenuItem";
-            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.exportSettingsToolStripMenuItem.Text = "&Exportér Indstillinger";
             this.exportSettingsToolStripMenuItem.Click += new System.EventHandler(this.exportSettingsToolStripMenuItem_Click);
             // 
             // openImageToolStripMenuItem
             // 
             this.openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.openImageToolStripMenuItem.Text = "Å&ben Billede";
             this.openImageToolStripMenuItem.Click += new System.EventHandler(this.openImageToolStripMenuItem_Click);
+            // 
+            // gemBilledeToolStripMenuItem
+            // 
+            this.gemBilledeToolStripMenuItem.Name = "gemBilledeToolStripMenuItem";
+            this.gemBilledeToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.gemBilledeToolStripMenuItem.Text = "&Gem Billede";
+            this.gemBilledeToolStripMenuItem.Click += new System.EventHandler(this.gemBilledeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.exitToolStripMenuItem.Text = "&Afslut";
             // 
             // settingsToolStripMenuItem
@@ -191,20 +198,14 @@
             // btn_track
             // 
             this.btn_track.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_track.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btn_track.Location = new System.Drawing.Point(680, 338);
             this.btn_track.Name = "btn_track";
             this.btn_track.Size = new System.Drawing.Size(92, 23);
             this.btn_track.TabIndex = 4;
             this.btn_track.Text = "&Start Tracking";
-            this.btn_track.UseVisualStyleBackColor = true;
+            this.btn_track.UseVisualStyleBackColor = false;
             this.btn_track.Click += new System.EventHandler(this.btn_track_Click);
-            // 
-            // gemBilledeToolStripMenuItem
-            // 
-            this.gemBilledeToolStripMenuItem.Name = "gemBilledeToolStripMenuItem";
-            this.gemBilledeToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.gemBilledeToolStripMenuItem.Text = "&Gem Billede";
-            this.gemBilledeToolStripMenuItem.Click += new System.EventHandler(this.gemBilledeToolStripMenuItem_Click);
             // 
             // Form1
             // 

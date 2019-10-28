@@ -53,6 +53,7 @@ namespace ImgTrack
             curimg = wc.CurrentImage.Clone() as Bitmap;
             pb_right.Image = Resizer.ResizeBitmap(curimg as Bitmap, Resizer.ResizeFrame(curimg.Size, pb_right.Size));
             pb_right.Tag = curimg.Clone() as Bitmap;
+            wc.ImageMutex.ReleaseMutex();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -150,9 +151,15 @@ namespace ImgTrack
         private void btn_track_Click(object sender, EventArgs e)
         {
             if (btn_track.Text == "&Start Tracking")
+            {
                 btn_track.Text = "&Stop Tracking";
+                btn_track.BackColor = Color.FromArgb(255, 96, 96);
+            }
             else
+            {
                 btn_track.Text = "&Start Tracking";
+                btn_track.BackColor = Color.FromArgb(0, 192, 0);
+            }
 
             thresholdToolStripMenuItem.Enabled = !thresholdToolStripMenuItem.Enabled;
             btn_capture.Enabled = !btn_capture.Enabled;
