@@ -179,5 +179,10 @@ namespace ImgTrack
                 MessageBox.Show("Der er ikke blevet taget noget billede. Tag et billede og prøv igen.", "Kan ikke gemme billede", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void cb_isolate_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.IsolateColor = cb_isolate.Checked;
+        }
     }
 }

@@ -44,6 +44,7 @@
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgw_setres = new System.ComponentModel.BackgroundWorker();
             this.btn_track = new System.Windows.Forms.Button();
+            this.cb_isolate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -207,11 +208,24 @@
             this.btn_track.UseVisualStyleBackColor = false;
             this.btn_track.Click += new System.EventHandler(this.btn_track_Click);
             // 
+            // cb_isolate
+            // 
+            this.cb_isolate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_isolate.AutoSize = true;
+            this.cb_isolate.Location = new System.Drawing.Point(596, 342);
+            this.cb_isolate.Name = "cb_isolate";
+            this.cb_isolate.Size = new System.Drawing.Size(78, 17);
+            this.cb_isolate.TabIndex = 5;
+            this.cb_isolate.Text = "Isolér farve";
+            this.cb_isolate.UseVisualStyleBackColor = true;
+            this.cb_isolate.CheckedChanged += new System.EventHandler(this.cb_isolate_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 372);
+            this.Controls.Add(this.cb_isolate);
             this.Controls.Add(this.btn_track);
             this.Controls.Add(this.btn_capture);
             this.Controls.Add(this.splitContainer1);
@@ -252,6 +266,7 @@
         private System.ComponentModel.BackgroundWorker bgw_setres;
         private System.Windows.Forms.Button btn_track;
         private System.Windows.Forms.ToolStripMenuItem gemBilledeToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cb_isolate;
     }
 }
 

@@ -10,6 +10,8 @@ namespace ImgTrack
         public static byte B = 180;
         public static int Accuracy = 50;
         public static double Compression = 0.25;
+        public static bool InSettings = false;
+        public static bool IsolateColor = false;
 
         public static string Export()
         {
