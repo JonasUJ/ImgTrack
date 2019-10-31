@@ -12,6 +12,7 @@ namespace ImgTrack
         private Image img;
         private Bitmap Oimg;
         private bool picking = false;
+        //først erklære vi en række variabler, et billede og et bitmap som vi skal bruge senere i koden
 
         public FormSettings(Image img)
         {
@@ -26,6 +27,7 @@ namespace ImgTrack
             labelGreen.Text = $"Grøn: {Settings.G}";
             labelBlue.Text = $"Blå: {Settings.B}";
             pb_preview.SizeChanged += new EventHandler(Resizer.PictureboxResize);
+            //Her hentes indstillinger, og sliders osv. bliver sat til deresretmæssige værdi
         }
 
         private void FormSettings_Load(object sender, EventArgs e)
