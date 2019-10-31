@@ -383,6 +383,7 @@
             this.MinimumSize = new System.Drawing.Size(849, 716);
             this.Name = "FormSettings";
             this.Text = "Grænseindstillinger";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
             this.Load += new System.EventHandler(this.FormSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_preview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarB)).EndInit();

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace ImgTrack
@@ -93,6 +90,19 @@ namespace ImgTrack
             {
                 g.DrawLine(Pens.Red, Column, 0, Column, b.Height);
                 g.DrawLine(Pens.Red, 0, Row, b.Width, Row);
+            }
+            return b;
+        }
+
+        public Bitmap DrawCross(Bitmap bmp)
+        {
+            int column = bmp.Height / Bmp.Height * Column;
+            int row = bmp.Width / Bmp.Width * Row;
+            Bitmap b = bmp.Clone() as Bitmap;
+            using (Graphics g = Graphics.FromImage(b))
+            {
+                g.DrawLine(Pens.Red, column, 0, column, b.Height);
+                g.DrawLine(Pens.Red, 0, row, b.Width, row);
             }
             return b;
         }

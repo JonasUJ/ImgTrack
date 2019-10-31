@@ -30,6 +30,7 @@ namespace ImgTrack
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
+            Settings.InSettings = true;
             Bitmap bmp = new Bitmap(img);
             Oimg = new Bitmap(img);
             ChartUtil.MakeIntoHistogram(chart_histogram, img);
@@ -130,6 +131,11 @@ namespace ImgTrack
             trackBarG.Value = Settings.G;
             trackBarB.Value = Settings.B;
             ChangeImage();
+        }
+
+        private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.InSettings = false;
         }
     }
 }
