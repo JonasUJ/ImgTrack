@@ -35,7 +35,7 @@ namespace ImgTrack
             Settings.InSettings = true;
             Bitmap bmp = new Bitmap(img);
             Oimg = new Bitmap(img);
-            ChartUtil.MakeIntoHistogram(chart_histogram, img);
+            ChartUtil.MakeIntoHistogram(chart_histogram, img); // Set the Chart as a histogram of the Image
             ChangeImage();
             for (int y = 0; y < bmp.Height; y++)
             {
@@ -76,19 +76,21 @@ namespace ImgTrack
 
         private void trackC_Scroll(object sender, EventArgs e)
         {
-            Settings.Compression = trackC.Value / 100.0;
+            Settings.Compression = trackC.Value / 100.0; // Compression is a value between 0.0 and 1.0
         }
 
+        // Updates the Image in the PictureBox
         private void ChangeImage()
         {
-            Bitmap withCross = Filters.TrackFilter(Oimg);
+            Bitmap withCross = Filters.TrackFilter(Oimg); // Apply TrackFilter
             panelColor.BackColor = Color.FromArgb(Settings.R, Settings.G, Settings.B);
             pb_preview.Tag = withCross;
-            pb_preview.Image = Resizer.ResizeBitmap(withCross, Resizer.ResizeFrame(withCross.Size, pb_preview.Size));
+            pb_preview.Image = Resizer.ResizeBitmap(withCross, Resizer.ResizeFrame(withCross.Size, pb_preview.Size)); // Resize to fit
         }
 
         private void Tb_MouseUp(object sender, MouseEventArgs e)
         {
+            // Updates the Image when the user has released the mousebutton they use to scroll on the TrackBars
             ChangeImage();
         }
 
@@ -101,15 +103,17 @@ namespace ImgTrack
         {
             if (picking)
             {
+                // Set the Image back to the filtered version
                 btn_picker.BackColor = SystemColors.Control;
                 gb_settings.Enabled = true;
                 ChangeImage();
             }
             else
             {
+                // Set the Image to the original
                 gb_settings.Enabled = false;
                 btn_picker.BackColor = Color.FromArgb(30, 180, 30);
-                pb_preview.Image = Resizer.ResizeBitmap(Oimg, Resizer.ResizeFrame(Oimg.Size, pb_preview.Size)); ;
+                pb_preview.Image = Resizer.ResizeBitmap(Oimg, Resizer.ResizeFrame(Oimg.Size, pb_preview.Size));
                 pb_preview.Tag = Oimg;
             }
             picking = !picking;
@@ -117,11 +121,18 @@ namespace ImgTrack
 
         private void pb_preview_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!picking) return;
+            if (!picking) return; // We don't care about clicks if we are not trying to pick a color
+
             Bitmap pbimg = pb_preview.Image as Bitmap;
+
+            // The PictureBox is docked to most of the left of the Form, but the Image does not fill it all.
+            // Therefore we calculate the coords of the click in relation to what space the Image 
+            // occupies and check if they clicked outside the image.
             int x = e.X - (pb_preview.Width - pbimg.Width) / 2;
             int y = e.Y - (pb_preview.Height - pbimg.Height) / 2;
             if (!(x >= 0 && y >= 0 && x <= pbimg.Width && y <= pbimg.Height)) return;
+
+            // Set the color to the one clicked and set everything as if we are not picking a color
             btn_picker.BackColor = SystemColors.Control;
             gb_settings.Enabled = true;
             picking = false;

@@ -9,6 +9,11 @@ namespace ImgTrack
     public partial class VideoSettings : Form
     {
         private Webcam webcam;
+
+        /// <summary>
+        /// A Form for choosing video resolution
+        /// </summary>
+        /// <param name="webcam">Webcam whose resolutions to use as options</param>
         public VideoSettings(Webcam webcam)
         {
             InitializeComponent();
@@ -17,12 +22,14 @@ namespace ImgTrack
 
         private void VideoSettings_Load(object sender, EventArgs e)
         {
-            foreach(VideoCapabilities vcap in webcam.videoSource.VideoCapabilities)
+            // Add options from the Webcams VideoCapabilities
+            foreach (VideoCapabilities vcap in webcam.videoSource.VideoCapabilities)
             {
                 AddOption(vcap);
             }
         }
 
+        // Adds a RadioButton to the Control using the passed VideoCapabilities
         private void AddOption(VideoCapabilities vcap)
         {
             RadioButton rbtn = new RadioButton
@@ -35,18 +42,17 @@ namespace ImgTrack
             flow_videoSettings.Controls.Add(rbtn);
         }
 
+        /// <summary>
+        /// Get the selected VideoCapabilities
+        /// </summary>
+        /// <returns>The VideoCapabilities selected in the from</returns>
         public VideoCapabilities GetSelection()
         {
-            RadioButton rbtn = flow_videoSettings.Controls.OfType<RadioButton>().Where(r => r.Checked).First();
+            RadioButton rbtn = flow_videoSettings.Controls.OfType<RadioButton>().Where(r => r.Checked).First(); // The checked RadioButton
             return (VideoCapabilities)rbtn.Tag;
         }
 
-        private void btn_apply_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btn_cancel_Click(object sender, EventArgs e)
+        private void CloseForm(object sender, EventArgs e)
         {
             this.Close();
         }

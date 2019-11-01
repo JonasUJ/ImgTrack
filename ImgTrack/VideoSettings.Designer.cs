@@ -67,7 +67,7 @@
             this.btn_apply.TabIndex = 1;
             this.btn_apply.Text = "&Acceptér";
             this.btn_apply.UseVisualStyleBackColor = true;
-            this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
+            this.btn_apply.Click += new System.EventHandler(this.CloseForm);
             // 
             // btn_cancel
             // 
@@ -79,7 +79,7 @@
             this.btn_cancel.TabIndex = 2;
             this.btn_cancel.Text = "A&nnuller";
             this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            this.btn_cancel.Click += new System.EventHandler(this.CloseForm);
             // 
             // VideoSettings
             // 
