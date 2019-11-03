@@ -138,35 +138,35 @@
             // importSettingsToolStripMenuItem
             // 
             this.importSettingsToolStripMenuItem.Name = "importSettingsToolStripMenuItem";
-            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.importSettingsToolStripMenuItem.Text = "&Imporér Indstillinger";
+            this.importSettingsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.importSettingsToolStripMenuItem.Text = "&Importér Indstillinger";
             this.importSettingsToolStripMenuItem.Click += new System.EventHandler(this.importSettingsToolStripMenuItem_Click);
             // 
             // exportSettingsToolStripMenuItem
             // 
             this.exportSettingsToolStripMenuItem.Name = "exportSettingsToolStripMenuItem";
-            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exportSettingsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.exportSettingsToolStripMenuItem.Text = "&Exportér Indstillinger";
             this.exportSettingsToolStripMenuItem.Click += new System.EventHandler(this.exportSettingsToolStripMenuItem_Click);
             // 
             // openImageToolStripMenuItem
             // 
             this.openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.openImageToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.openImageToolStripMenuItem.Text = "Å&ben Billede";
             this.openImageToolStripMenuItem.Click += new System.EventHandler(this.openImageToolStripMenuItem_Click);
             // 
             // gemBilledeToolStripMenuItem
             // 
             this.gemBilledeToolStripMenuItem.Name = "gemBilledeToolStripMenuItem";
-            this.gemBilledeToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.gemBilledeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.gemBilledeToolStripMenuItem.Text = "&Gem Billede";
             this.gemBilledeToolStripMenuItem.Click += new System.EventHandler(this.gemBilledeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.exitToolStripMenuItem.Text = "&Afslut";
             // 
             // settingsToolStripMenuItem
